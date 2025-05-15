@@ -12,14 +12,15 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        User::truncate();
         if(User::count() == 0) {
             // Usuario Administrador
             User::create([
-            'name' => 'Admin',
+            'name' => 'Admin Paco',
             'email' => env('ADMIN_EMAIL', 'alumplastic@alumplastic.com'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumplastic')),
             ]);
         }
-        $this->command->info('¡Usuario administrador creado!');
+        $this->command->info('Usuario administrador creado!');
     }
 }
