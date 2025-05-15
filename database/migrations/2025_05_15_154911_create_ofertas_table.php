@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('ofertas', function (Blueprint $table) {
             $table->id();
             $table->string('comentario');
-            $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade');
+            $table->foreignId('producto_id')->constrained('productos')->onDelete('cascade')->onUpdate('cascade');
             $table->boolean('estado')->default(1);
             $table->timestamps();
         });
