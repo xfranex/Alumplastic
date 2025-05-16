@@ -373,7 +373,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <p>2018 &copy; Elegant. Website Designed by <a href="http://w3Template.com" target="_blank" rel="dofollow">W3 Template</a></p>
+        <p>Desarrollador <a href="https://github.com/xfranex">xfranex</a></p>
       </div>
     </div>
   </div>
