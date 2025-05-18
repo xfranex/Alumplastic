@@ -6,8 +6,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() {
+    Route::get('/', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
 
 require __DIR__.'/auth.php';
