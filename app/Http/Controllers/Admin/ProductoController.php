@@ -15,10 +15,8 @@ class ProductoController extends Controller
     public function index(Request $request)
     {
         $tiposProductos = TipoProducto::select('id', 'nombre_tipo_producto')->distinct()->get();
-        $limit = $request->input('limit', 10);
-        $productos = Producto::latest()->with('tipoProducto')->take($limit)->get();
-        $total = Producto::count();
-        return view('admin.productos.index', compact('productos', 'limit', 'total', 'tiposProductos'));
+        $productos = Producto::with('tipoProducto')->get();
+        return view('admin.productos.index', compact('productos', 'tiposProductos'));
     }
 
     /**
