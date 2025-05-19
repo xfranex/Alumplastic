@@ -30,7 +30,7 @@ class TipoProductoController extends Controller
         TipoProducto::create([
             'nombre_tipo_producto' => $request->nombre_tipo_producto
         ]);
-        return redirect()->route('productos.index');
+        return redirect()->route('productos.index')->with('successT', 'Tipo de producto creado correctamente.');
     }
 
 
@@ -55,7 +55,7 @@ class TipoProductoController extends Controller
         ]);
         $tipo->nombre_tipo_producto = $request->nombre_tipo_producto;
         $tipo->save();
-        return redirect()->route('productos.index');
+        return redirect()->route('productos.index')->with('successT', 'Tipo de producto actualizado correctamente.'); //poner successT en la sesion para no equivocarte con los productos
     }
 
     /**
@@ -63,7 +63,12 @@ class TipoProductoController extends Controller
      */
     public function destroy(TipoProducto $tipo)
     {
+        $tieneProductos = $tipo->productos()->exists(); //si tiene productos asociados entonces aparece el mensaje "session('success')"
         $tipo->delete();
-        return redirect()->route('productos.index');
+        if ($tieneProductos) {
+            return redirect()->route('productos.index')->with('successT', 'Tipo de producto eliminado correctamente.')->with('success', 'Productos eliminados correctamente.');
+        } else {
+            return redirect()->route('productos.index')->with('successT', 'Tipo de producto eliminado correctamente.');
+        }
     }
 }

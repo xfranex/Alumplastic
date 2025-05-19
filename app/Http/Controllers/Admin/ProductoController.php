@@ -26,7 +26,8 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        $tiposProductos = TipoProducto::select('id', 'nombre_tipo_producto')->distinct()->get();
+        return view('admin.productos.create', compact('tiposProductos'));
     }
 
     /**
@@ -34,7 +35,20 @@ class ProductoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255|unique:productos,nombre',
+            'tipo_producto_id' => 'required|exists:tipos_productos,id',
+        ], [
+            'nombre.required' => 'El nombre del producto es obligatorio.',
+            'nombre.unique' => 'El nombre del producto ya existe.',
+            'tipo_producto_id.required' => 'El tipo de producto es obligatorio.',
+            'tipo_producto_id.exists' => 'El tipo de producto seleccionado no existe.',
+        ]);
+        Producto::create([
+            'nombre' => $request->nombre,
+            'tipo_producto_id' => $request->tipo_producto_id,
+        ]);
+        return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
     }
 
     /**
@@ -42,7 +56,8 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        //
+        $tiposProductos = TipoProducto::select('id', 'nombre_tipo_producto')->distinct()->get();
+        return view('admin.productos.edit', compact('producto', 'tiposProductos'));
     }
 
     /**
@@ -50,7 +65,19 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255|unique:productos,nombre,' . $producto->id,
+            'tipo_producto_id' => 'required|exists:tipos_productos,id',
+        ], [
+            'nombre.required' => 'El nombre del producto es obligatorio.',
+            'nombre.unique' => 'El nombre del producto ya existe.',
+            'tipo_producto_id.required' => 'El tipo de producto es obligatorio.',
+            'tipo_producto_id.exists' => 'El tipo de producto seleccionado no existe.',
+        ]);
+        $producto->nombre = $request->nombre;
+        $producto->tipo_producto_id = $request->tipo_producto_id;
+        $producto->save();
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
     /**
@@ -58,6 +85,7 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
-        //
+        $producto->delete();
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente.');
     }
 }
