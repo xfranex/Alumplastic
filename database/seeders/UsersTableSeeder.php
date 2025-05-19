@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             // Usuario Administrador
             User::create([
             'name' => 'Admin Paco',
-            'email' => env('ADMIN_EMAIL', 'alumplastic@alumplastic.com'),
+            'email' => env('ADMIN_EMAIL', 'alumplastic@alumplastic.es'),
             'password' => bcrypt(env('ADMIN_PASSWORD', 'alumplastic')),
             ]);
         }
