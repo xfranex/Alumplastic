@@ -21,7 +21,7 @@ a {
 	text-decoration: none !important;
 }
 a:hover {
-	color: #ffaf53 !important;
+	color: #2563EB !important;
 }
 img {
 	max-width: 100%;
@@ -31,6 +31,23 @@ img {
 .logo-1 {
 	width: 300px;
 	height: auto;
+}
+.minimoAltura {
+	min-height: 250px;
+}
+@keyframes colorProductos {
+  0% {
+    background-color: #ffffff;
+  }
+  50% {
+    background-color: #5a9bf6;
+  }
+  100% {
+    background-color: #c4201a;
+  }
+}
+.animacionProductos:hover {
+  animation: colorProductos 8s infinite ease-in-out alternate;
 }
 span, a {
 	display: inline-block;
@@ -84,7 +101,7 @@ h6 {
 	z-index: 1030;
 }
 .navbar .active {
-	color: #ffaf53 !important;
+	color: #ff0000 !important;
 }
 .navbar .nav-item {
 	margin: 0 5px;

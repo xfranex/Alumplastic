@@ -79,18 +79,17 @@
 <!-- End About -->
 
 <!-- Services -->
-<div class="services section-padding bg-grey" data-scroll-index='2'>
+<div class="services section-padding bg-grey" data-scroll-index="2">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
-        <div class="service-box bg-white text-center">
-          <div class="icon"> <i class="fas fa-paint-brush"></i> </div>
-          <div class="icon-text">
-            <h4 class="title-box">Clean Design</h4>
-            <p>Sed malesuada, est eget condimentum iaculis, nisi ex facilisis metus.</p>
-          </div>
+    <div class="row justify-content-center">
+      <!-- Bloque 1 -->
+      <div class="col-12 col-sm-10 col-md-6 col-lg-4 mb-4">
+        <div class="service-box text-center p-5 shadow rounded d-flex align-items-center justify-content-center minimoAltura animacionProductos">
+          <h4 class="w-100 m-0">Ventana Corredera</h4>
         </div>
       </div>
+      <!-- Bloque 2 -->
+      
     </div>
   </div>
 </div>
