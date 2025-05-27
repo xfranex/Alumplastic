@@ -28,6 +28,10 @@ img {
 	height: auto;
 	vertical-align: middle;
 }
+.logo-1 {
+	width: 300px;
+	height: auto;
+}
 span, a {
 	display: inline-block;
 	color: inherit;

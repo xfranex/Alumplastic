@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
         Schema::disableForeignKeyConstraints();
 
+        $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->command->info('Tablas inicializadas con datos!');
 

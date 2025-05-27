@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/jquery.fancybox.min.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/owl.carousel.min.css') }}"/>
-<link rel="stylesheet" type="text/css" hfref="{{ asset('alumplastic/css/owl.theme.default.min.css') }}"/>
+<link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/owl.theme.default.min.css') }}"/>
 
 <!-- Font Google -->
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
@@ -22,15 +22,15 @@
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg">
-  <div class="container"> <a class="navbar-brand navbar-logo" href="#"> <img src="{{ asset('alumplastic/images/logo-white.png') }}" alt="logo" class="logo-1"> </a>
+  <div class="container"> <a class="navbar-brand navbar-logo" href="{{ route('welcome') }}"> <img src="{{ asset('alumplastic/images/logo.svg') }}" alt="logo" class="logo-1"> </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="fas fa-bars"></span> </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item"> <a class="nav-link" href="" data-scroll-nav="0">Home</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="1">About</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="2">Services</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="3">Own Work</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="4">Contact</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="0">Inicio</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="1">Sobre Nosotros</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="2">Productos</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="3">Trabajos</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="4">Contacto</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{{ route('login') }}">Panel Administracion</a> </li>
       </ul>
     </div>
@@ -82,55 +82,6 @@
 <div class="services section-padding bg-grey" data-scroll-index='2'>
   <div class="container">
     <div class="row">
-      <div class="col-md-12 section-title text-center">
-        <h3>We Are Best At Our Service</h3>
-        <p>Vestibulum elementum dui tempus dolor gravida, vel mattis erat fermentum.</p>
-        <span class="section-title-line"></span> </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
-        <div class="service-box bg-white text-center">
-          <div class="icon"> <i class="fas fa-chart-line"></i> </div>
-          <div class="icon-text">
-            <h4 class="title-box">Chart Line</h4>
-            <p>Sed malesuada, est eget condimentum iaculis, nisi ex facilisis metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
-        <div class="service-box bg-white text-center">
-          <div class="icon"> <i class="fas fa-bullhorn "></i> </div>
-          <div class="icon-text">
-            <h4 class="title-box">Quick Anouncement</h4>
-            <p>Sed malesuada, est eget condimentum iaculis, nisi ex facilisis metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
-        <div class="service-box bg-white text-center">
-          <div class="icon"> <i class="fas fa-map-marked"></i> </div>
-          <div class="icon-text">
-            <h4 class="title-box">Mark Location</h4>
-            <p>Sed malesuada, est eget condimentum iaculis, nisi ex facilisis metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
-        <div class="service-box bg-white text-center">
-          <div class="icon"> <i class="fas fa-bug"></i> </div>
-          <div class="icon-text">
-            <h4 class="title-box">Bug Solution</h4>
-            <p>Sed malesuada, est eget condimentum iaculis, nisi ex facilisis metus.</p>
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
-        <div class="service-box bg-white text-center">
-          <div class="icon"> <i class="fas fa-comments"></i> </div>
-          <div class="icon-text">
-            <h4 class="title-box">Fast Communication</h4>
-            <p>Sed malesuada, est eget condimentum iaculis, nisi ex facilisis metus.</p>
-          </div>
-        </div>
-      </div>
       <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 mb-30">
         <div class="service-box bg-white text-center">
           <div class="icon"> <i class="fas fa-paint-brush"></i> </div>
@@ -399,13 +350,13 @@
       if(bodyScroll > 130){
 
           navbar.addClass("nav-scroll");
-          $('.navbar-logo img').attr('src', "{{ asset('alumplastic/images/logo-black.png') }}");
+          $('.navbar-logo img').attr('src', "{{ asset('alumplastic/images/logo.svg') }}");
 
 
       }else{
 
           navbar.removeClass("nav-scroll");
-          $('.navbar-logo img').attr('src', "{{ asset('alumplastic/images/logo-white.png') }}");
+          $('.navbar-logo img').attr('src', "{{ asset('alumplastic/images/logo.svg') }}");
 
       }
 
@@ -421,13 +372,13 @@ navbar = $(".navbar");
 if(bodyScroll > 130){
 
 navbar.addClass("nav-scroll");
-$('.navbar-logo img').attr('src','{{ asset('alumplastic/images/logo-black.png') }}');
+$('.navbar-logo img').attr('src','{{ asset('alumplastic/images/logo.svg') }}');
 
 
 }else{
 
 navbar.removeClass("nav-scroll");
-$('.navbar-logo img').attr('src','{{ asset('alumplastic/images/logo-white.png') }}');
+$('.navbar-logo img').attr('src','{{ asset('alumplastic/images/logo.svg') }}');
 
 }
 

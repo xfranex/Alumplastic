@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Rol;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,15 +13,28 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
+        $rolAdmin = Rol::where('nombre_rol', 'administrador')->first();
+        $rolEmpleado = Rol::where('nombre_rol', 'empleado')->first();
+
         User::truncate();
         if(User::count() == 0) {
             // Usuario Administrador
             User::create([
-            'name' => 'Admin Paco',
-            'email' => env('ADMIN_EMAIL', 'alumplastic@alumplastic.es'),
-            'password' => bcrypt(env('ADMIN_PASSWORD', 'alumplastic')),
+            'name' => 'Paco',
+            'email' => env('ADMIN_EMAIL'),
+            'password' => bcrypt(env('ADMIN_PASSWORD')),
+            'rol_id' => $rolAdmin->id,
             ]);
         }
-        $this->command->info('Usuario administrador creado!');
+
+        // Usuario Empleado
+        User::create([
+            'name' => 'Empleado',
+            'email' => env('EMPLOYEE_EMAIL'),
+            'password' => bcrypt(env('EMPLOYEE_PASSWORD')),
+            'rol_id' => $rolEmpleado->id,
+        ]);
+        
+        $this->command->info('Usuarios creados!');
     }
 }
