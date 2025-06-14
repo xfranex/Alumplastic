@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('producto_serie', function (Blueprint $table) {
             $table->id();
             $table->foreignId('producto_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('serie_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('nombre');     
-            $table->string('descripcion');  
+            $table->foreignId('serie_id')->constrained()->onDelete('cascade')->onUpdate('cascade');   
+            $table->text('descripcion');  
             $table->string('imagen');
             $table->timestamps();
+            $table->unique(['producto_id', 'serie_id']);
         });
     }
 

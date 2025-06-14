@@ -18,6 +18,6 @@ class Producto extends Model
 
     public function series()
     {
-        return $this->belongsToMany(Serie::class)->withPivot('nombre', 'descripcion', 'imagen')->withTimestamps();
+        return $this->belongsToMany(Serie::class)->withPivot('descripcion', 'imagen')->withTimestamps();
     }
 }
