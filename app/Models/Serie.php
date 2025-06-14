@@ -13,8 +13,8 @@ class Serie extends Model
         'producto_id'
     ];
 
-    public function producto()
+    public function productos()
     {
-        return $this->belongsTo(Producto::class);
+        return $this->belongsToMany(Producto::class)->withPivot('nombre', 'descripcion', 'imagen')->withTimestamps();
     }
 }
