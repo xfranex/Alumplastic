@@ -14,7 +14,8 @@ class ConsultaController extends Controller
      */
     public function index()
     {
-        //
+        $consultas = Consulta::all();
+        return view('admin.consultas.index', ['consultas' => $consultas]);
     }
 
     /**
@@ -26,7 +27,7 @@ class ConsultaController extends Controller
             'nombre' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
             'telefono' => 'required|digits:9',
             'email' => 'required|email|max:255',
-            'mensaje' => 'required|string|max:1000',
+            'mensaje' => 'required|string|max:5000',
         ], [
             'nombre.required' => 'El nombre es obligatorio',
             'nombre.max' => 'El nombre no puede tener más de 255 caracteres',
@@ -37,7 +38,7 @@ class ConsultaController extends Controller
             'email.email' => 'El formato del correo no es válido',
             'email.max' => 'El email no puede tener más de 255 caracteres',
             'mensaje.required' => 'El mensaje es obligatorio',
-            'mensaje.max' => 'El mensaje no puede tener más de 1000 caracteres'
+            'mensaje.max' => 'El mensaje no puede tener más de 5000 caracteres'
         ]);
 
         if ($validacion->fails()) {
@@ -55,7 +56,7 @@ class ConsultaController extends Controller
             'mensaje' => $request->mensaje,
         ]);
         
-        return redirect()->route('welcome')->withFragment('4')->with('success', 'Tu mensaje ha sido enviado correctamente');
+        return redirect()->route('welcome')->withFragment('4')->with('successContacto', 'Tu mensaje ha sido enviado correctamente');
     }
 
     /**
@@ -63,7 +64,7 @@ class ConsultaController extends Controller
      */
     public function show(Consulta $consulta)
     {
-        //
+        return view('admin.consultas.show', ['consulta' => $consulta]);
     }
 
     /**
@@ -72,6 +73,6 @@ class ConsultaController extends Controller
     public function destroy(Consulta $consulta)
     {
         $consulta->delete();
-        return redirect()->route('consultas.index')->with('success', 'Consulta eliminada');
+        return redirect()->route('consultas.index')->with('successEliminadoConsulta', 'Consulta eliminada');
     }
 }

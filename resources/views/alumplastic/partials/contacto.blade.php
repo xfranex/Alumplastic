@@ -1,4 +1,4 @@
-<div class="contact section-padding" id="4" data-scroll-index='4'>
+<div class="contact section-padding" data-scroll-index='4'>
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-title text-center">
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="col-lg-7 col-md-8">
-                <div class="contact-form">
+                <div class="contact-form" id="4">
                     <form action="{{ route('consultas.store') }}" class='form' id='contact-form' method='post'>
                         @csrf
                         <div class="messages"></div>
@@ -73,9 +73,9 @@
                                 </div>
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="bttn">Enviar</button>
-                                    @if (session('success'))
+                                    @if (session('successContacto'))
                                         <div id="success-message" class="alert alert-success text-center mt-4">
-                                            {{ session('success') }}
+                                            {{ session('successContacto') }}
                                         </div>
                                     @endif
                                 </div>

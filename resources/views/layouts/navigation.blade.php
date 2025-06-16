@@ -16,6 +16,11 @@
                         {{ __('Web') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.index')">
+                        {{ __('Consultas') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -65,6 +70,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                 {{ __('Pagina Web') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.index')">
+                {{ __('Consultas') }}
             </x-responsive-nav-link>
         </div>
 
