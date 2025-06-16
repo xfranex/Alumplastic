@@ -5,50 +5,60 @@
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
                 <h3 class="text-center font-semibold text-lg">Consultas Recibidas</h3>
             </div>
-            <table class="min-w-full bg-white border-collapse hidden md:table">
-                <thead class="bg-gray-800 text-white">
-                    <tr>
-                        <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">Nombre
-                        </th>
-                        <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
-                            Teléfono</th>
-                        <th class="w-1/4 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">Email
-                        </th>
-                        <th class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm break-words">Mensaje</th>
-                        <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
-                            Acciones</th>
-                    </tr>
-                </thead>
-                <tbody class="text-gray-700">
-                    @foreach ($consultas as $consulta)
-                        <tr class="border-b border-gray-200">
-                            <td class="text-center py-3 px-4 whitespace-nowrap">{{ $consulta->nombre }}</td>
-                            <td class="text-center py-3 px-4 whitespace-nowrap">{{ $consulta->telefono }}</td>
-                            <td class="text-center py-3 px-4 whitespace-nowrap truncate max-w-xs"
-                                title="{{ $consulta->email }}">{{ $consulta->email }}</td>
-                            <td class="text-center py-3 px-4 break-words max-w-xs">{{ $consulta->mensaje }}</td>
-                            <td class="text-center py-3 px-4 whitespace-nowrap">
-                                <div class="inline-flex space-x-2 justify-center">
-                                    <a href="{{ route('consultas.show', $consulta) }}">
-                                        <button
-                                            class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded">
-                                            Ver
-                                        </button>
-                                    </a>
-                                    <form action="{{ route('consultas.destroy', $consulta) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit"
-                                            class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded">
-                                            Eliminar
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
+            <div class="overflow-x-auto">
+                <table class="min-w-full bg-white border-collapse table-fixed hidden md:table">
+                    <thead class="bg-gray-800 text-white">
+                        <tr>
+                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                                Nombre
+                            </th>
+                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                                Teléfono</th>
+                            <th class="w-1/4 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                                Email
+                            </th>
+                            <th
+                                class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm truncate max-w-[15ch]">
+                                Mensaje</th>
+                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                                Acciones</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="text-gray-700">
+                        @foreach ($consultas as $consulta)
+                            <tr class="border-b border-gray-200">
+                                <td class="text-center py-3 px-4 whitespace-nowrap truncate max-w-[12ch]">
+                                    {{ $consulta->nombre }}</td>
+                                <td class="text-center py-3 px-4 whitespace-nowrap truncate max-w-[12ch]">
+                                    {{ $consulta->telefono }}</td>
+                                <td class="text-center py-3 px-4 whitespace-nowrap truncate max-w-[20ch]">
+                                    {{ $consulta->email }}</td>
+                                <td class="text-center py-3 px-4 truncate max-w-[15ch]">
+                                    {{ Str::limit($consulta->mensaje, 10) }}
+                                </td>
+                                <td class="text-center py-3 px-4 whitespace-nowrap">
+                                    <div class="inline-flex space-x-2 justify-center">
+                                        <a href="{{ route('consultas.show', $consulta) }}">
+                                            <button
+                                                class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded">
+                                                Ver
+                                            </button>
+                                        </a>
+                                        <form action="{{ route('consultas.destroy', $consulta) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit"
+                                                class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded">
+                                                Eliminar
+                                            </button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             <div class="md:hidden space-y-4 bg-white p-4">
                 @foreach ($consultas as $consulta)
                     <div class="border border-gray-200 rounded shadow p-4">
