@@ -74,9 +74,20 @@
                                 <div class="col-lg-12 text-center">
                                     <button type="submit" class="bttn">Enviar</button>
                                     @if (session('successContacto'))
-                                        <div id="success-message" class="alert alert-success text-center mt-4">
+                                        <div id="success-message"
+                                            class="mt-4 !text-green-600 text-center font-bold mensajeContacto">
                                             {{ session('successContacto') }}
                                         </div>
+                                        <script>
+                                            setTimeout(() => {
+                                                const msg = document.getElementById('success-message');
+                                                if (msg) {
+                                                    msg.style.transition = 'opacity 0.5s ease';
+                                                    msg.style.opacity = '0';
+                                                    setTimeout(() => msg.remove(), 500);
+                                                }
+                                            }, 6000);
+                                        </script>
                                     @endif
                                 </div>
                             </div>
