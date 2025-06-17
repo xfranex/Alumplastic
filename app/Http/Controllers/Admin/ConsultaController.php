@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ConsultaNueva;
 use App\Models\Consulta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class ConsultaController extends Controller
@@ -55,7 +57,16 @@ class ConsultaController extends Controller
             'email' => $request->email,
             'mensaje' => $request->mensaje,
         ]);
-        
+
+        $data = [
+            'nombre' => $request->nombre,
+            'telefono' => $request->telefono,
+            'email' => $request->email,
+            'mensaje' => $request->mensaje,
+        ];
+
+        Mail::to('alumplastic@yahoo.es')->send(new ConsultaNueva($data));
+        //el "to" es hacia quien va recibido
         return redirect()->route('welcome')->withFragment('4')->with('successContacto', 'Tu mensaje ha sido enviado correctamente');
     }
 
