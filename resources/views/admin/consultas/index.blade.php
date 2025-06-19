@@ -44,14 +44,16 @@
                                                 Ver
                                             </button>
                                         </a>
-                                        <form action="{{ route('consultas.destroy', $consulta) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded">
-                                                Eliminar
-                                            </button>
-                                        </form>
+                                        @can('delete', $consulta)
+                                            <form action="{{ route('consultas.destroy', $consulta) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

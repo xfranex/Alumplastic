@@ -8,14 +8,17 @@ use App\Models\Consulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class ConsultaController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Consulta::class);
         $consultas = Consulta::all();
         return view('admin.consultas.index', ['consultas' => $consultas]);
     }
@@ -75,6 +78,7 @@ class ConsultaController extends Controller
      */
     public function show(Consulta $consulta)
     {
+        $this->authorize('view', Consulta::class);
         return view('admin.consultas.show', ['consulta' => $consulta]);
     }
 
@@ -83,6 +87,7 @@ class ConsultaController extends Controller
      */
     public function destroy(Consulta $consulta)
     {
+        $this->authorize('delete', Consulta::class);
         $consulta->delete();
         return redirect()->route('consultas.index')->with('successEliminadoConsulta', 'Consulta eliminada');
     }

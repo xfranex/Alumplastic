@@ -15,9 +15,11 @@
                     <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
                         {{ __('Web') }}
                     </x-nav-link>
-                     <x-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.index')">
-                        {{ __('Consultas') }}
-                    </x-nav-link>
+                    @can('viewAny', \App\Models\Consulta::class)
+                        <x-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.index')">
+                            {{ __('Consultas') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
