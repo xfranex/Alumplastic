@@ -14,11 +14,11 @@
                             </th>
                             <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Teléfono</th>
-                            <th class="w-1/4 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Email
                             </th>
                             <th
-                                class="w-1/3 text-center py-3 px-4 uppercase font-semibold text-sm truncate max-w-[15ch]">
+                                class="w-2/6 text-center py-3 px-4 uppercase font-semibold text-sm truncate max-w-[15ch]">
                                 Mensaje</th>
                             <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Acciones</th>
