@@ -20,6 +20,9 @@
                             {{ __('Consultas') }}
                         </x-nav-link>
                     @endcan
+                    <x-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
+                        {{ __('Carpinterias') }}
+                    </x-nav-link>
                 </div>
             </div>
 

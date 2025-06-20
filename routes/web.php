@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\CarpinteriaController;
 use App\Http\Controllers\Admin\ConsultaController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,7 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() 
         return redirect()->route('consultas.index');
     })->name('dashboard');
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
+    Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);
 });
 
 require __DIR__.'/auth.php';
