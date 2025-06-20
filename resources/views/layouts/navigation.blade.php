@@ -75,9 +75,16 @@
                 {{ __('Pagina Web') }}
             </x-responsive-nav-link>
         </div>
+        @can('viewAny', \App\Models\Consulta::class)
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.index')">
+                    {{ __('Consultas') }}
+                </x-responsive-nav-link>
+            </div>
+        @endcan
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('consultas.index')" :active="request()->routeIs('consultas.index')">
-                {{ __('Consultas') }}
+            <x-responsive-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
+                {{ __('Carpinterias') }}
             </x-responsive-nav-link>
         </div>
 
