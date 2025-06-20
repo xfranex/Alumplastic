@@ -1,5 +1,17 @@
 <x-app-layout>
     <div class="px-4 py-2"></div>
+    <div class="flex justify-center mt-4 space-x-3">
+        <a href="{{ route('carpinterias.create') }}">
+            <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
+                Crear Carpintería
+            </button>
+        </a>
+        <a href="{{ route('carpinterias.create') }}">
+            <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
+                Series
+            </button>
+        </a>
+    </div>
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="shadow rounded border border-gray-200 mt-6 bg-white">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
@@ -86,18 +98,7 @@
                 @endforeach
             </div>
         </div>
-        <div class="flex justify-center mt-4 space-x-3">
-            <a href="{{ route('carpinterias.create') }}">
-                <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
-                    Crear Carpintería
-                </button>
-            </a>
-            <a href="{{ route('carpinterias.create') }}">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
-                    Series
-                </button>
-            </a>
-        </div>
+       
 
         @if (session('successCarpinteriaStore'))
             <div id="success-message"
