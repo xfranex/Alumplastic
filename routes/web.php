@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CarpinteriaController;
 use App\Http\Controllers\Admin\ConsultaController;
+use App\Http\Controllers\Admin\ProductoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +17,7 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() 
     })->name('dashboard');
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
     Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);
+    Route::resource('carpinterias.productos', ProductoController::class)->except(['show'])->shallow();
 });
 
 require __DIR__.'/auth.php';

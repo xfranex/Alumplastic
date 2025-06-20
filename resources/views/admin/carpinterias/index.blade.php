@@ -31,10 +31,10 @@
                                                 Editar
                                             </button>
                                         </a>
-                                        <a href="{{ route('carpinterias.index', $carpinteria) }}"> <!--hacer ruta anidada-->
+                                        <a href="{{ route('carpinterias.productos.index', $carpinteria) }}"> <!--hacer ruta anidada-->
                                             <button
                                                 class="min-w-[100px] bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
-                                                Ver Productos
+                                                Productos
                                             </button>
                                         </a>
                                         <form action="{{ route('carpinterias.destroy', $carpinteria) }}" method="POST">
@@ -67,10 +67,10 @@
                                     Editar
                                 </button>
                             </a>
-                            <a href="{{ route('carpinterias.index', $carpinteria) }}"> <!--hacer ruta anidada-->
+                            <a href="{{ route('carpinterias.productos.index', $carpinteria) }}"> <!--hacer ruta anidada-->
                                 <button
                                     class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
-                                    Ver Productos
+                                    Productos
                                 </button>
                             </a>
                             <form action="{{ route('carpinterias.destroy', $carpinteria) }}" method="POST">
@@ -86,10 +86,15 @@
                 @endforeach
             </div>
         </div>
-        <div class="flex justify-center mt-4">
+        <div class="flex justify-center mt-4 space-x-3">
             <a href="{{ route('carpinterias.create') }}">
                 <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
                     Crear Carpintería
+                </button>
+            </a>
+            <a href="{{ route('carpinterias.create') }}">
+                <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
+                    Series
                 </button>
             </a>
         </div>

@@ -40,7 +40,7 @@ class CarpinteriaController extends Controller
         ]);
 
         Carpinteria::create([
-            'nombre' => $request->nombre,
+            'nombre' => strtoupper($request->nombre),
         ]);
 
         return redirect()->route('carpinterias.index')->with('successCarpinteriaStore', 'Carpintería creada correctamente');
@@ -68,7 +68,7 @@ class CarpinteriaController extends Controller
             'nombre.max'      => 'El nombre no debe superar los 255 caracteres',
         ]);
 
-        $carpinteria->nombre = $request->nombre;
+        $carpinteria->nombre = strtoupper($request->nombre);
         $carpinteria->save();
         return redirect()->route('carpinterias.index')->with('successCarpinteriaUpdate', 'Carpintería actualizada correctamente');
     }
