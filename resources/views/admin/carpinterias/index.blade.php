@@ -12,6 +12,22 @@
             </button>
         </a>
     </div>
+    @if (session('successCarpinteriaStore'))
+        <div id="success-message"
+            class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
+            <p class="text-sm font-semibold">{{ session('successCarpinteriaStore') }}</p>
+        </div>
+    @elseif(session('successCarpinteriaUpdate'))
+        <div id="success-message"
+            class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
+            <p class="text-sm font-semibold">{{ session('successCarpinteriaUpdate') }}</p>
+        </div>
+    @elseif(session('successCarpinteriaDelete'))
+        <div id="success-message"
+            class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
+            <p class="text-sm font-semibold">{{ session('successCarpinteriaDelete') }}</p>
+        </div>
+    @endif
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="shadow rounded border border-gray-200 mt-6 bg-white">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
@@ -98,25 +114,6 @@
                 @endforeach
             </div>
         </div>
-       
-
-        @if (session('successCarpinteriaStore'))
-            <div id="success-message"
-                class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
-                <p class="text-sm font-semibold">{{ session('successCarpinteriaStore') }}</p>
-            </div>
-        @elseif(session('successCarpinteriaUpdate'))
-            <div id="success-message"
-                class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
-                <p class="text-sm font-semibold">{{ session('successCarpinteriaUpdate') }}</p>
-            </div>
-        @elseif(session('successCarpinteriaDelete'))
-            <div id="success-message"
-                class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
-                <p class="text-sm font-semibold">{{ session('successCarpinteriaDelete') }}</p>
-            </div>
-        @endif
-
         <script>
             setTimeout(() => {
                 const msg = document.getElementById('success-message');

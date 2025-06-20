@@ -1,5 +1,11 @@
 <x-app-layout>
     <div class="px-4 py-2"></div>
+    @if (session('successEliminadoConsulta'))
+        <div id="success-message-producto"
+            class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
+            <p class="text-sm font-semibold">{{ session('successEliminadoConsulta') }}</p>
+        </div>
+    @endif
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="shadow rounded border border-gray-200 mt-6">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
@@ -90,21 +96,15 @@
                 @endforeach
             </div>
         </div>
-        @if (session('successEliminadoConsulta'))
-            <div id="success-message-producto"
-                class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
-                <p class="text-sm font-semibold">{{ session('successEliminadoConsulta') }}</p>
-            </div>
-            <script>
-                setTimeout(() => {
-                    const msg = document.getElementById('success-message-producto');
-                    if (msg) {
-                        msg.style.transition = 'opacity 0.5s ease';
-                        msg.style.opacity = '0';
-                        setTimeout(() => msg.remove(), 500);
-                    }
-                }, 4000);
-            </script>
-        @endif
     </div>
+    <script>
+        setTimeout(() => {
+            const msg = document.getElementById('success-message-producto');
+            if (msg) {
+                msg.style.transition = 'opacity 0.5s ease';
+                msg.style.opacity = '0';
+                setTimeout(() => msg.remove(), 500);
+            }
+        }, 3000);
+    </script>
 </x-app-layout>
