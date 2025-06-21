@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-//prefix api
-Route::get('/mensaje', function () {
-    return response()->json(['mensaje' => 'API funcionando']);
+//prefix api/v1
+Route::prefix('v1')->group(function() {
+    Route::get('/mensaje', function () {
+        return response()->json(['mensaje' => 'API publica funcionando']);
+    });
 });
