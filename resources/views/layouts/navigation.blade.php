@@ -23,6 +23,9 @@
                     <x-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
                         {{ __('Carpinterias') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
+                        {{ __('Trabajos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -85,6 +88,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
                 {{ __('Carpinterias') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
+                {{ __('Trabajos') }}
             </x-responsive-nav-link>
         </div>
 
