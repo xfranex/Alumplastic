@@ -14,4 +14,9 @@ class Carpinteria extends Model
     {
         return $this->hasMany(Producto::class);
     }
+
+    public function trabajos()
+    {
+        return $this->hasMany(Trabajo::class);
+    }
 }
