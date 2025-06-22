@@ -210,7 +210,7 @@ h6 {
 	width: 175px;
 }
 .section-title-line:after {
-	background: #ab2f52;
+	background: #2563EB;
 	bottom: -1px;
 	content: "";
 	height: 2px;
@@ -317,7 +317,7 @@ h6 {
 	border: 0;
 }
 .portfolio .filtering .active {
-	background-color: #ab2f52;
+	background-color: #2563EB;
 	color: #fff;
 	border-radius: 28px;
 	-webkit-box-shadow: 0px 10px 30px -4px rgba(0, 0, 0, 0.2);
