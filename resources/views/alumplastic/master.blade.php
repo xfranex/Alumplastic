@@ -28,7 +28,8 @@
   </div>
 </div>
 
-@include('alumplastic.partials.galeria')
+<x-galeria-trabajos/>
+
 @include('alumplastic.partials.pasarela')
 @include('alumplastic.partials.contacto')
 @include('alumplastic.partials.footer')
