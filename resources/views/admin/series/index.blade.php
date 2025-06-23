@@ -63,7 +63,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit"
-                                                class="min-w-[100px] bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
+                                                class="min-w-[100px] bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap botonEliminar">
                                                 Eliminar
                                             </button>
                                         </form>
@@ -93,7 +93,7 @@
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
+                                    class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded min-w-[120px] botonEliminar">
                                     Eliminar
                                 </button>
                             </form>
