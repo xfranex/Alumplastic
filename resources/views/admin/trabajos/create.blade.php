@@ -88,10 +88,10 @@
                     rotatable: true,
                     scalable: false,
                     background: false,
-                    minCropBoxWidth: 600,
+                    /*minCropBoxWidth: 600,
                     minCropBoxHeight: 400,
                     minContainerWidth: 600,
-                    minContainerHeight: 400,
+                    minContainerHeight: 400,*/
                     responsive: true,
                     cropBoxResizable: false 
                 });
