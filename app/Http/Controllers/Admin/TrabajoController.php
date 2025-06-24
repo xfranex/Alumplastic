@@ -37,11 +37,14 @@ class TrabajoController extends Controller
     {
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
-            'cropped_image' => 'required',
+            'imagen' => 'required|image|mimes:png,jpg,jpeg,webp|dimensions:min_width=600,min_height=400'
         ], [
             'carpinteria_id.required' => 'La carpintería es obligatoria',
             'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
-            'cropped_image.required' => 'La imagen es obligatoria',
+            'imagen.required' => 'La imagen es obligatoria',
+            'imagen.image' => 'Debe ser una imagen válida',
+            'imagen.mimes' => 'El tipo de archivo no es correcto',
+            'imagen.dimensions' => 'La imagen debe tener al menos 600x400 px',
         ]);
 
         //instancia creada del gestor de imagenes junto la carga base64 y redimensionar
@@ -85,11 +88,11 @@ class TrabajoController extends Controller
     {
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
-            'cropped_image' => 'required',
+            'imagen' => 'required'
         ], [
             'carpinteria_id.required' => 'La carpintería es obligatoria',
             'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
-            'cropped_image.required' => 'La imagen es obligatoria',
+            'imagen.required' => 'La imagen es obligatoria',
         ]);
 
         //elimina la imagen anterior si existe
