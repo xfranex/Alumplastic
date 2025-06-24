@@ -37,33 +37,34 @@ class TrabajoController extends Controller
     {
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
-            'cropped_image' => 'required|string',
+            'cropped_image' => 'required',
         ], [
             'carpinteria_id.required' => 'La carpintería es obligatoria',
             'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
             'cropped_image.required' => 'La imagen es obligatoria',
         ]);
 
-        $croppedImage = $request->input('cropped_image');
-
+        //instancia creada del gestor de imagenes junto la carga base64 y redimensionar
         $manager = new ImageManager(new Driver());
-        $image = $manager->read($croppedImage);
+        $imagen = $manager->read($request->cropped_image)->resize(600, 400);
 
-        $image = $image->resize(600, 400);
+        //crear nombre para la imagen y defino la ruta
+        $nombreArchivo = 'trabajo_' . time() . '.webp';
+        $ruta = storage_path('app/public/trabajos/' . $nombreArchivo);
 
-        $filename = 'trabajo_' . time() . '.webp';
-        $path = storage_path('app/public/trabajos/' . $filename);
-
+        //si no existe la carpeta la crea
         if (!file_exists(storage_path('app/public/trabajos'))) {
             mkdir(storage_path('app/public/trabajos'), 0755, true);
         }
 
-        $image->toWebp(100)->save($path);
+        //la guarda en webp con la maxima calidad
+        $imagen->toWebp(100)->save($ruta);
 
-        $trabajo = new Trabajo();
-        $trabajo->carpinteria_id = $request->carpinteria_id;
-        $trabajo->imagen = 'trabajos/' . $filename;
-        $trabajo->save();
+        //registro en la bbdd
+        Trabajo::create([
+            'carpinteria_id' => $request->carpinteria_id,
+            'imagen' => 'trabajos/' . $nombreArchivo,
+        ]);
 
         return redirect()->route('trabajos.index')->with('successTrabajoStore', 'Trabajo creado correctamente');
     }
@@ -84,52 +85,36 @@ class TrabajoController extends Controller
     {
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
-            'cropped_image' => 'required|string',
+            'cropped_image' => 'required',
         ], [
             'carpinteria_id.required' => 'La carpintería es obligatoria',
             'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
             'cropped_image.required' => 'La imagen es obligatoria',
         ]);
 
-        $croppedImage = $request->input('cropped_image');
-
-        if (preg_match('/^data:image\/(\w+);base64,/', $croppedImage, $type)) {
-            $croppedImage = substr($croppedImage, strpos($croppedImage, ',') + 1);
-            $type = strtolower($type[1]);
-
-            if (!in_array($type, ['jpg', 'jpeg', 'png', 'webp'])) {
-                return back()->withErrors(['cropped_image' => 'Formato de imagen no soportado']);
-            }
-
-            $croppedImage = base64_decode($croppedImage);
-            if ($croppedImage === false) {
-                return back()->withErrors(['cropped_image' => 'Imagen inválida']);
-            }
-        } else {
-            return back()->withErrors(['cropped_image' => 'Imagen inválida']);
-        }
-
+        //elimina la imagen anterior si existe
         if ($trabajo->imagen && Storage::disk('public')->exists($trabajo->imagen)) {
             Storage::disk('public')->delete($trabajo->imagen);
         }
 
+        //instancia creada del gestor de imagenes
         $manager = new ImageManager(new Driver());
-        $image = $manager->read($croppedImage);
 
-        $image->resize(600, 400);
+        //lee la imagen base64 recibida y redimensionar a esos px
+        $imagen = $manager->read($request->cropped_image)->resize(600, 400);
 
-        $filename = 'trabajo_' . time() . '.webp';
-        $path = storage_path('app/public/trabajos/' . $filename);
+        //crea el nombre para la imagen y defino ruta
+        $nombreArchivo = 'trabajo_' . time() . '.webp';
+        $ruta = storage_path('app/public/trabajos/' . $nombreArchivo);
 
-        if (!file_exists(storage_path('app/public/trabajos'))) {
-            mkdir(storage_path('app/public/trabajos'), 0755, true);
-        }
+        //a webp con la maxima calidad
+        $imagen->toWebp(100)->save($ruta);
 
-        $image->toWebp(100)->save($path);
-
-        $trabajo->carpinteria_id = $request->carpinteria_id;
-        $trabajo->imagen = 'trabajos/' . $filename;
-        $trabajo->save();
+        //actualizar el registro en la bbdd
+        $trabajo->update([
+            'carpinteria_id' => $request->carpinteria_id,
+            'imagen' => 'trabajos/' . $nombreArchivo,
+        ]);
 
         return redirect()->route('trabajos.index')->with('successTrabajoUpdate', 'Trabajo actualizado correctamente');
     }
