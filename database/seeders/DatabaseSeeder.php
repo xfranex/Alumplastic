@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call(RolesTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(CarpinteriasTableSeeder::class);
         $this->command->info('Tablas inicializadas con datos!');
 
         Model::reguard();
