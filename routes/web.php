@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\ConsultaController;
 use App\Http\Controllers\Admin\ProductoController;
 use App\Http\Controllers\Admin\SerieController;
 use App\Http\Controllers\Admin\TrabajoController;
+use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -22,6 +23,7 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() 
     Route::resource('carpinterias.productos', ProductoController::class)->shallow();
     Route::resource('series', SerieController::class)->except(['show'])->parameters(['series' => 'serie']);
     Route::resource('trabajos', TrabajoController::class)->except(['show']);
+    Route::resource('usuarios', UserController::class)->except(['create','store','show','destroy'])->parameters(['usuarios' => 'user']);
 });
 
 require __DIR__.'/auth.php';

@@ -26,6 +26,9 @@
                     <x-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
                         {{ __('Trabajos') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                        {{ __('Usuarios') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -93,6 +96,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
                 {{ __('Trabajos') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                {{ __('Usuarios') }}
             </x-responsive-nav-link>
         </div>
 
