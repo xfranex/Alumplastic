@@ -26,9 +26,11 @@
                     <x-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
                         {{ __('Trabajos') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
-                        {{ __('Usuarios') }}
-                    </x-nav-link>
+                    @can('viewAny', \App\Models\User::class)
+                        <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                            {{ __('Usuarios') }}
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 
@@ -98,11 +100,13 @@
                 {{ __('Trabajos') }}
             </x-responsive-nav-link>
         </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
-                {{ __('Usuarios') }}
-            </x-responsive-nav-link>
-        </div>
+        @can('viewAny', \App\Models\User::class)
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
+                    {{ __('Usuarios') }}
+                </x-responsive-nav-link>
+            </div>
+        @endcan
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
