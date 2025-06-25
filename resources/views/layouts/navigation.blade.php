@@ -23,9 +23,11 @@
                     <x-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
                         {{ __('Carpinterias') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
-                        {{ __('Trabajos') }}
-                    </x-nav-link>
+                    @can('viewAny', \App\Models\Trabajo::class)
+                        <x-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
+                            {{ __('Trabajos') }}
+                        </x-nav-link>
+                    @endcan
                     @can('viewAny', \App\Models\User::class)
                         <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
                             {{ __('Usuarios') }}
@@ -80,7 +82,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                {{ __('Pagina Web') }}
+                {{ __('Web') }}
             </x-responsive-nav-link>
         </div>
         @can('viewAny', \App\Models\Consulta::class)
@@ -95,11 +97,13 @@
                 {{ __('Carpinterias') }}
             </x-responsive-nav-link>
         </div>
-        <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
-                {{ __('Trabajos') }}
-            </x-responsive-nav-link>
-        </div>
+        @can('viewAny', \App\Models\Trabajo::class)
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
+                    {{ __('Trabajos') }}
+                </x-responsive-nav-link>
+            </div>
+        @endcan
         @can('viewAny', \App\Models\User::class)
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">

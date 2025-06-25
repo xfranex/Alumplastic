@@ -9,14 +9,17 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Intervention\Image\ImageManager;
 use Intervention\Image\Drivers\Gd\Driver;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
 class TrabajoController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Trabajo::class);
         $trabajos = Trabajo::with('carpinteria')->get();
         return view('admin.trabajos.index', ['trabajos' => $trabajos]);
     }
@@ -26,6 +29,7 @@ class TrabajoController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Trabajo::class);
         $carpinterias = Carpinteria::all();
         return view('admin.trabajos.create', ['carpinterias' => $carpinterias]);
     }
@@ -35,6 +39,7 @@ class TrabajoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Trabajo::class);
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
             'imagen' => 'required|image|mimes:png,jpg,jpeg,webp|dimensions:min_width=600,min_height=400'
@@ -77,6 +82,7 @@ class TrabajoController extends Controller
      */
     public function edit(Trabajo $trabajo)
     {
+        $this->authorize('update', Trabajo::class);
         $carpinterias = Carpinteria::all();
         return view('admin.trabajos.edit', ['carpinterias' => $carpinterias, 'trabajo' => $trabajo]);
     }
@@ -86,6 +92,7 @@ class TrabajoController extends Controller
      */
     public function update(Request $request, Trabajo $trabajo)
     {
+        $this->authorize('update', Trabajo::class);
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
             'imagen' => 'required'
@@ -127,6 +134,7 @@ class TrabajoController extends Controller
      */
     public function destroy(Trabajo $trabajo)
     {
+        $this->authorize('delete', Trabajo::class);
         if ($trabajo->imagen && Storage::disk('public')->exists($trabajo->imagen)) {
             Storage::disk('public')->delete($trabajo->imagen);
         }

@@ -1,12 +1,14 @@
 <x-app-layout>
     <div class="px-4 py-2"></div>
-    <div class="flex justify-center mt-4 space-x-3">
-        <a href="{{ route('trabajos.create') }}">
-            <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
-                Crear Trabajo
-            </button>
-        </a>
-    </div>
+    @can('create', \App\Models\Trabajo::class)
+        <div class="flex justify-center mt-4 space-x-3">
+            <a href="{{ route('trabajos.create') }}">
+                <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
+                    Crear Trabajo
+                </button>
+            </a>
+        </div>
+    @endcan
 
     @if (session('successTrabajoStore'))
         <div id="success-message"
@@ -50,24 +52,26 @@
                                         Ver Imagen
                                     </a>
                                 </td>
-                                <td class="text-center py-3 px-4 whitespace-nowrap">
-                                    <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('trabajos.edit', $trabajo) }}">
-                                            <button
-                                                class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
-                                                Editar
-                                            </button>
-                                        </a>
-                                        <form action="{{ route('trabajos.destroy', $trabajo) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="min-w-[100px] bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap botonEliminar">
-                                                Eliminar
-                                            </button>
-                                        </form>
-                                    </div>
-                                </td>
+                                @can('create', \App\Models\Trabajo::class)
+                                    <td class="text-center py-3 px-4 whitespace-nowrap">
+                                        <div class="flex justify-center space-x-2">
+                                            <a href="{{ route('trabajos.edit', $trabajo) }}">
+                                                <button
+                                                    class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
+                                                    Editar
+                                                </button>
+                                            </a>
+                                            <form action="{{ route('trabajos.destroy', $trabajo) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="min-w-[100px] bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap botonEliminar">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                @endcan
                             </tr>
                         @endforeach
                     </tbody>
@@ -86,22 +90,24 @@
                                 Ver imagen
                             </a>
                         </div>
-                        <div class="flex flex-col space-y-2 items-center">
-                            <a href="{{ route('trabajos.edit', $trabajo) }}">
-                                <button
-                                    class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
-                                    Editar
-                                </button>
-                            </a>
-                            <form action="{{ route('trabajos.destroy', $trabajo) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded min-w-[120px] botonEliminar">
-                                    Eliminar
-                                </button>
-                            </form>
-                        </div>
+                        @can('create', \App\Models\Trabajo::class)
+                            <div class="flex flex-col space-y-2 items-center">
+                                <a href="{{ route('trabajos.edit', $trabajo) }}">
+                                    <button
+                                        class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
+                                        Editar
+                                    </button>
+                                </a>
+                                <form action="{{ route('trabajos.destroy', $trabajo) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded min-w-[120px] botonEliminar">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            </div>
+                        @endcan
                     </div>
                 @endforeach
             </div>
