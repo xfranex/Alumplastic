@@ -18,7 +18,7 @@ class ProductoController extends Controller
      */
     public function index(Carpinteria $carpinteria)
     {
-        $productos = $carpinteria->productos()->with('series')->get();
+        $productos = $carpinteria->productos;
         return view('admin.productos.index', ['productos' => $productos, 'carpinteria' => $carpinteria]);
     }
 
@@ -40,7 +40,7 @@ class ProductoController extends Controller
             'nombre' => 'required|max:255|unique:productos,nombre,NULL,id,carpinteria_id,' . $carpinteria->id,
             'serie_id' => 'required|exists:series,id',
             'descripcion' => 'required',
-            'imagen' => 'required',
+            'imagen' => 'required|image|mimes:png,jpg,jpeg,webp',
         ], [
             'nombre.required' => 'El nombre del producto es obligatorio',
             'nombre.max' => 'El nombre es demasiado largo',
@@ -49,12 +49,16 @@ class ProductoController extends Controller
             'serie_id.exists' => 'La serie seleccionada no es válida',
             'descripcion.required' => 'La descripción es obligatoria',
             'imagen.required' => 'La imagen es obligatoria',
+            'imagen.image' => 'Debe ser una imagen válida',
+            'imagen.mimes' => 'El tipo de archivo no es correcto',
         ]);
+        
+        $nombreSerie = Serie::findorFail($request->serie_id);
 
         $manager = new ImageManager(new Driver());
-        $imagen = $manager->read($request->imagen)->resize(600, 400);
+        $imagen = $manager->read($request->cropped_image)->resize(1600, 900);
 
-        $nombreArchivo = 'producto_' . str_replace(' ', '_', $request->nombre) . '_' . $carpinteria->nombre . time() . '.webp';
+        $nombreArchivo = 'producto_' . str_replace(' ', '_', $nombreSerie->nombre) . '_' . str_replace(' ', '_', $request->nombre) . '_' . $carpinteria->nombre . time() . '.webp';
         $ruta = storage_path('app/public/productos/' . $nombreArchivo);
 
         if (!file_exists(storage_path('app/public/productos'))) {
@@ -76,22 +80,12 @@ class ProductoController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(Producto $producto)
-    {
-        $producto->load('carpinteria', 'series');
-        return view('admin.productos.show', ['producto' => $producto]);
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Producto $producto)
     {
-        $producto->load('carpinteria', 'series'); 
-        $series = Serie::all();
-        return view('admin.productos.edit', ['producto' => $producto, 'series' => $series]);
+        $carpinteria = $producto->carpinteria;
+        return view('admin.productos.edit', ['producto' => $producto, 'carpinteria' => $carpinteria]);
     }
 
     /**
@@ -99,44 +93,19 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
+        $carpinteria = $producto->carpinteria;
         $request->validate([
             'nombre' => 'required|max:255|unique:productos,nombre,' . $producto->id . ',id,carpinteria_id,' . $producto->carpinteria_id,
-            'serie_id' => 'required|exists:series,id',
-            'descripcion' => 'required',
-            'imagen' => 'required',
         ], [
             'nombre.required' => 'El nombre del producto es obligatorio',
             'nombre.max' => 'El nombre es demasiado largo',
             'nombre.unique' => 'El nombre del producto ya existe en esta carpintería',
-            'serie_id.required' => 'Debe seleccionar una serie',
-            'serie_id.exists' => 'La serie seleccionada no es válida',
-            'descripcion.required' => 'La descripción es obligatoria',
-            'imagen.required' => 'La imagen es obligatoria',
         ]);
 
-        $datosPivot = $producto->series()->where('series.id', $request->serie_id)->first();
-
-        if ($datosPivot && $datosPivot->pivot->imagen && Storage::disk('public')->exists($datosPivot->pivot->imagen)) {
-            Storage::disk('public')->delete($datosPivot->pivot->imagen);
-        }
-
-        $manager = new ImageManager(new Driver());
-        $imagen = $manager->read($request->imagenn)->resize(600, 400);
-
-        $nombreArchivo = 'producto_' . str_replace(' ', '_', $request->nombre) . '_' . $producto->carpinteria->nombre . time() . '.webp';
-        $ruta = storage_path('app/public/productos/' . $nombreArchivo);
-        $imagen->toWebp(100)->save($ruta);
-
-        $producto->nombre = strtoupper($request->nombre);
+        $producto->nombre =  strtoupper($request->nombre);
         $producto->save();
 
-        $producto->series()->detach($request->serie_id);
-        $producto->series()->attach($request->serie_id, [
-            'descripcion' => $request->descripcion,
-            'imagen' => 'productos/' . $nombreArchivo,
-        ]);
-
-        return redirect()->route('carpinterias.productos.index', $producto->carpinteria)->with('successProductoUpdate', 'Producto actualizado correctamente');
+        return redirect()->route('carpinterias.productos.index', $carpinteria)->with('successProductoUpdate', 'Producto actualizado correctamente');
     }
 
     /**

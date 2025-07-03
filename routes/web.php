@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CarpinteriaController;
 use App\Http\Controllers\Admin\ConsultaController;
 use App\Http\Controllers\Admin\ProductoController;
+use App\Http\Controllers\Admin\ProductoSerieController;
 use App\Http\Controllers\Admin\SerieController;
 use App\Http\Controllers\Admin\TrabajoController;
 use App\Http\Controllers\Admin\UserController;
@@ -20,10 +21,11 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() 
     })->name('dashboard');
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
     Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);
-    Route::resource('carpinterias.productos', ProductoController::class)->shallow();
+    Route::resource('carpinterias.productos', ProductoController::class)->except(['show'])->shallow();
     Route::resource('series', SerieController::class)->except(['show'])->parameters(['series' => 'serie']);
     Route::resource('trabajos', TrabajoController::class)->except(['show']);
     Route::resource('usuarios', UserController::class)->except(['create','store','show','destroy'])->parameters(['usuarios' => 'user']);
+    Route::resource('productos.series', ProductoSerieController::class)->shallow(); //proximo commit
 });
 
 require __DIR__.'/auth.php';

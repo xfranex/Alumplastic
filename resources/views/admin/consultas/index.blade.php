@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="px-4 py-2"></div>
     @if (session('successEliminadoConsulta'))
-        <div id="success-message-producto"
+        <div id="success-message"
             class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
             <p class="text-sm font-semibold">{{ session('successEliminadoConsulta') }}</p>
         </div>
@@ -101,7 +101,7 @@
     </div>
     <script>
         setTimeout(() => {
-            const msg = document.getElementById('success-message-producto');
+            const msg = document.getElementById('success-message');
             if (msg) {
                 msg.style.transition = 'opacity 0.5s ease';
                 msg.style.opacity = '0';

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Serie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class SerieController extends Controller
 {
@@ -78,7 +79,27 @@ class SerieController extends Controller
      */
     public function destroy(Serie $serie)
     {
+        $productos = $serie->productos;
+
+        foreach ($productos as $producto) {
+            $imagen = $producto->series()->where('serie_id', $serie->id)->first()->pivot->imagen;
+
+            $producto->series()->detach($serie->id);
+
+            if ($imagen && Storage::disk('public')->exists($imagen)) {
+                Storage::disk('public')->delete($imagen);
+            }
+
+            if ($producto->series()->count() == 0) {
+                if ($producto->imagen && Storage::disk('public')->exists($producto->imagen)) {
+                    Storage::disk('public')->delete($producto->imagen);
+                }
+                $producto->delete();
+            }
+        }
+
         $serie->delete();
+
         return redirect()->route('series.index')->with('successSerieDelete', 'Serie eliminada correctamente');
     }
 }

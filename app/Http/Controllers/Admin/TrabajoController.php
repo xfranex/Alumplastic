@@ -57,7 +57,8 @@ class TrabajoController extends Controller
         $imagen = $manager->read($request->imagen)->resize(600, 400);
 
         //crear nombre para la imagen y defino la ruta
-        $nombreArchivo = 'trabajo_' . time() . '.webp';
+        $carpinteria = Carpinteria::findOrFail($request->carpinteria_id)->nombre;
+        $nombreArchivo = 'trabajo_' . $carpinteria . time() . '.webp';
         $ruta = storage_path('app/public/trabajos/' . $nombreArchivo);
 
         //si no existe la carpeta la crea
@@ -114,7 +115,8 @@ class TrabajoController extends Controller
         $imagen = $manager->read($request->cropped_image)->resize(600, 400);
 
         //crea el nombre para la imagen y defino ruta
-        $nombreArchivo = 'trabajo_' . time() . '.webp';
+        $carpinteria = Carpinteria::findOrFail($request->carpinteria_id)->nombre;
+        $nombreArchivo = 'trabajo_' . $carpinteria . time() . '.webp';
         $ruta = storage_path('app/public/trabajos/' . $nombreArchivo);
 
         //a webp con la maxima calidad

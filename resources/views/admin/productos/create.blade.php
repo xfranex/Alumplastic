@@ -3,29 +3,45 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="shadow rounded border border-gray-200 mt-6 bg-white">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
-                <h3 class="text-center font-semibold text-lg">Crear Trabajo</h3>
+                <h3 class="text-center font-semibold text-lg">Crear Producto en {{ $carpinteria->nombre }}</h3>
             </div>
             <div class="p-6">
-                <form id="form-trabajo" method="POST" action="{{ route('trabajos.store') }}" class="space-y-6" enctype="multipart/form-data">
+                <form id="form-producto" method="POST" action="{{ route('carpinterias.productos.store', $carpinteria) }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <label for="carpinteria_id" class="block text-gray-700 font-semibold mb-2">Carpintería</label>
-                        <select name="carpinteria_id" id="carpinteria_id" 
+                        <label for="nombre" class="block text-gray-700 font-semibold mb-2">Nombre del Producto</label>
+                        <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"
                             class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            <option value="">Seleccione una carpintería</option>
-                            @foreach ($carpinterias as $carpinteria)
-                                <option value="{{ $carpinteria->id }}" {{ old('carpinteria_id') == $carpinteria->id ? 'selected' : '' }}>
-                                    {{ $carpinteria->nombre }}
+                        @error('nombre')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="descripcion" class="block text-gray-700 font-semibold mb-2">Descripción</label>
+                        <textarea name="descripcion" id="descripcion" rows="4"
+                            class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('descripcion') }}</textarea>
+                        @error('descripcion')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="serie_id" class="block text-gray-700 font-semibold mb-2">Serie</label>
+                        <select name="serie_id" id="serie_id"
+                            class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Seleccione una serie</option>
+                            @foreach ($series as $serie)
+                                <option value="{{ $serie->id }}" {{ old('serie_id') == $serie->id ? 'selected' : '' }}>
+                                    {{ $serie->nombre }}
                                 </option>
                             @endforeach
                         </select>
-                        @error('carpinteria_id')
+                        @error('serie_id')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label for="inputImagen" class="block text-gray-700 font-semibold mb-2">Imagen</label>
-                        <input type="file" id="inputImagen" accept="image/*" name="imagen" 
+                        <input type="file" id="inputImagen" accept="image/*" name="imagen"
                             class="border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('imagen')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
@@ -50,7 +66,7 @@
                             class="w-full sm:w-auto bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded whitespace-nowrap">
                             Guardar
                         </button>
-                        <a href="{{ route('trabajos.index') }}" class="w-full sm:w-auto">
+                        <a href="{{ route('carpinterias.productos.index', $carpinteria) }}" class="w-full sm:w-auto">
                             <button type="button"
                                 class="w-full sm:w-auto bg-gray-500 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded whitespace-nowrap">
                                 Cancelar
@@ -80,7 +96,7 @@
                 if (cropper) cropper.destroy();
 
                 cropper = new Cropper(image, {
-                    aspectRatio: 600 / 400,
+                    aspectRatio: 1600 / 900,
                     viewMode: 1,
                     autoCropArea: 1,
                     movable: true,
@@ -88,12 +104,8 @@
                     rotatable: true,
                     scalable: false,
                     background: false,
-                    /*minCropBoxWidth: 600,
-                    minCropBoxHeight: 400,
-                    minContainerWidth: 600,
-                    minContainerHeight: 400,*/
                     responsive: true,
-                    cropBoxResizable: false 
+                    cropBoxResizable: false
                 });
             }
         });
@@ -106,18 +118,18 @@
             if (cropper) cropper.rotate(90);
         });
 
-        document.getElementById('form-trabajo').addEventListener('submit', function(e) {
+        document.getElementById('form-producto').addEventListener('submit', function(e) {
             e.preventDefault();
 
             if (cropper) {
                 cropper.getCroppedCanvas({
-                    width: 600,
-                    height: 400,
+                    width: 1600,
+                    height: 900,
                     imageSmoothingEnabled: true,
                     imageSmoothingQuality: 'high',
                 }).toBlob((blob) => {
                     const reader = new FileReader();
-                    reader.readAsDataURL(blob); // Convertir a base64
+                    reader.readAsDataURL(blob); //convertir a base64
                     reader.onloadend = function() {
                         croppedImageInput.value = reader.result;
                         e.target.submit();

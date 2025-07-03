@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Carpinteria;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CarpinteriaController extends Controller
 {
@@ -78,6 +79,24 @@ class CarpinteriaController extends Controller
      */
     public function destroy(Carpinteria $carpinteria)
     {
+        foreach ($carpinteria->productos as $producto) {
+            foreach ($producto->series as $serie) {
+                if ($serie->pivot && $serie->pivot->imagen) {
+                    if (Storage::disk('public')->exists($serie->pivot->imagen)) {
+                        Storage::disk('public')->delete($serie->pivot->imagen);
+                    }
+                }
+            }
+            $producto->series()->detach();
+            $producto->delete();
+        }
+
+        foreach ($carpinteria->trabajos as $trabajo) {
+            if ($trabajo->imagen && Storage::disk('public')->exists($trabajo->imagen)) {
+                Storage::disk('public')->delete($trabajo->imagen);
+            }
+            $trabajo->delete();
+        }
         $carpinteria->delete();
         return redirect()->route('carpinterias.index')->with('successCarpinteriaDelete', 'Carpintería eliminada correctamente');
     }
