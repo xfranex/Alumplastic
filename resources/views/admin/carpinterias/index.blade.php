@@ -59,7 +59,7 @@
                                                 Editar
                                             </button>
                                         </a>
-                                        <a href="{{ route('carpinterias.productos.index', $carpinteria) }}"> <!--hacer ruta anidada-->
+                                        <a href="{{ route('carpinterias.productos.index', $carpinteria) }}">
                                             <button
                                                 class="min-w-[100px] bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
                                                 Productos

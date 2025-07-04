@@ -2,7 +2,7 @@
     <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div class="w-full flex justify-center my-4 space-x-2">
             <a href="{{ route('carpinterias.productos.create', $carpinteria) }}">
-                <button class="bg-green-500 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded">
+                <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
                     Crear Producto
                 </button>
             </a>
