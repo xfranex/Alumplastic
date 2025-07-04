@@ -21,7 +21,7 @@
                         </x-nav-link>
                     @endcan
                     <x-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
-                        {{ __('Carpinterias') }}
+                        {{ __('Carpinterías') }}
                     </x-nav-link>
                     @can('viewAny', \App\Models\Trabajo::class)
                         <x-nav-link :href="route('trabajos.index')" :active="request()->routeIs('trabajos.index')">
@@ -94,7 +94,7 @@
         @endcan
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('carpinterias.index')" :active="request()->routeIs('carpinterias.index')">
-                {{ __('Carpinterias') }}
+                {{ __('Carpinterías') }}
             </x-responsive-nav-link>
         </div>
         @can('viewAny', \App\Models\Trabajo::class)

@@ -20,7 +20,7 @@
                             <div class="part-img"> <img src="{{ asset('storage/' . $trabajo->imagen) }}" alt="imagen">
                                 <div class="overlay-img">
                                     <h4>{{ $trabajo->carpinteria->nombre }}</h4>
-                                    <h6>Carpinteria</h6>
+                                    <h6>Carpintería</h6>
                                 </div>
                             </div>
                         </div>
