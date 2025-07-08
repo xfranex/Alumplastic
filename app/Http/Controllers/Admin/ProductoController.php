@@ -18,6 +18,10 @@ class ProductoController extends Controller
      */
     public function index(Carpinteria $carpinteria)
     {
+        if (session()->has('formProducto') && session()->has('carpinteria')) {
+            session()->forget(['formProducto', 'carpinteria']);
+        }
+        
         $productos = $carpinteria->productos;
         return view('admin.productos.index', ['productos' => $productos, 'carpinteria' => $carpinteria]);
     }
@@ -36,6 +40,18 @@ class ProductoController extends Controller
      */
     public function store(Request $request, Carpinteria $carpinteria)
     {
+        if ($request->accion === 'crear_serie') {
+            session([
+                'formProducto' => [
+                    'nombre' => $request->nombre,
+                    'descripcion' => $request->descripcion,
+                ],
+                'carpinteria' => $carpinteria->id,
+            ]);
+
+            return redirect()->route('series.create');
+        }
+        
         $request->validate([
             'nombre' => 'required|max:255|unique:productos,nombre,NULL,id,carpinteria_id,' . $carpinteria->id,
             'serie_id' => 'required|exists:series,id',

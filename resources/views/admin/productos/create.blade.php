@@ -8,18 +8,19 @@
             <div class="p-6">
                 <form id="form-producto" method="POST" action="{{ route('carpinterias.productos.store', $carpinteria) }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="accion" id="accion" value="">
                     <div>
                         <label for="nombre" class="block text-gray-700 font-semibold mb-2">Nombre del Producto</label>
-                        <input type="text" name="nombre" id="nombre" value="{{ old('nombre') }}"
-                            class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        <input type="text" name="nombre" id="nombre"
+                        value="{{ old('nombre', session('formProducto.nombre')) }}"
+                        class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('nombre')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
                         <label for="descripcion" class="block text-gray-700 font-semibold mb-2">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" rows="4"
-                            class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('descripcion') }}</textarea>
+                        <textarea name="descripcion" id="descripcion" rows="4" class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left">{{ old('descripcion', session('formProducto.descripcion')) }}</textarea>
                         @error('descripcion')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -35,6 +36,9 @@
                                 </option>
                             @endforeach
                         </select>
+                        <button type="submit" onclick="setAccion('crear_serie')" class="bg-green-600 hover:bg-green-800 text-white font-semibold py-1 px-2 rounded mt-2">
+                            ¿No existe la serie? Créala
+                        </button>
                         @error('serie_id')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
@@ -51,23 +55,23 @@
                         <img id="image" style="max-width: 100%; display:none; margin-top: 0.5rem;" />
                     </div>
                     <div class="my-2 space-x-2 text-center">
-                        <button type="button" id="rotateLeft"
+                        <button type="button" id="rotateLeft" 
                             class="bg-gray-500 hover:bg-gray-800 text-white font-semibold py-1 px-3 rounded">
                             Rotar Izquierda
                         </button>
-                        <button type="button" id="rotateRight"
+                        <button type="button" id="rotateRight" 
                             class="bg-gray-500 hover:bg-gray-800 text-white font-semibold py-1 px-3 rounded">
                             Rotar Derecha
                         </button>
                     </div>
                     <input type="hidden" name="cropped_image" id="croppedImageInput" />
                     <div class="flex flex-col sm:flex-row justify-center sm:space-x-4 space-y-4 sm:space-y-0">
-                        <button type="submit"
+                        <button type="submit" 
                             class="w-full sm:w-auto bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded whitespace-nowrap">
                             Guardar
                         </button>
                         <a href="{{ route('carpinterias.productos.index', $carpinteria) }}" class="w-full sm:w-auto">
-                            <button type="button"
+                            <button type="button" 
                                 class="w-full sm:w-auto bg-gray-500 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded whitespace-nowrap">
                                 Cancelar
                             </button>
@@ -79,6 +83,10 @@
     </div>
 
     <script>
+        function setAccion(valor) {
+            document.getElementById('accion').value = valor;
+        }
+
         let cropper;
         const image = document.getElementById('image');
         const inputImagen = document.getElementById('inputImagen');
