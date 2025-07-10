@@ -16,7 +16,7 @@
                             <option value="">Seleccione una carpintería</option>
                             @foreach ($carpinterias as $carpinteria)
                                 <option value="{{ $carpinteria->id }}"
-                                    {{ $trabajo->carpinteria_id == $carpinteria->id ? 'selected' : '' }}>
+                                    {{ old('carpinteria_id', $trabajo->carpinteria_id ?? '') == $carpinteria->id ? 'selected' : '' }}>
                                     {{ $carpinteria->nombre }}
                                 </option>
                             @endforeach
