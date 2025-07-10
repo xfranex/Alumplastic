@@ -54,7 +54,7 @@ class TrabajoController extends Controller
 
         //instancia creada del gestor de imagenes junto la carga base64 y redimensionar
         $manager = new ImageManager(new Driver());
-        $imagen = $manager->read($request->imagen)->resize(600, 400);
+        $imagen = $manager->read($request->cropped_image)->resize(600, 400);
 
         //crear nombre para la imagen y defino la ruta
         $carpinteria = Carpinteria::findOrFail($request->carpinteria_id)->nombre;
