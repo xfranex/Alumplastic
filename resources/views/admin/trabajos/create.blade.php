@@ -31,8 +31,10 @@
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                    <div>
-                        <img id="image" style="max-width: 100%; display:none; margin-top: 0.5rem;" />
+                    <div class="flex justify-center">
+                        <div class="relative w-full max-w-lg aspect-[4/3] bg-gray-100">
+                            <img id="image" class="absolute inset-0 w-full h-full object-cover"/>
+                        </div>
                     </div>
                     <div class="my-2 space-x-2 text-center">
                         <button type="button" id="rotateLeft"

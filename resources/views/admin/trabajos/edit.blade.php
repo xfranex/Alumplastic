@@ -34,7 +34,7 @@
                         @enderror
                     </div>
                     <div class="flex justify-center">
-                        <div class="relative w-full max-w-lg aspect-[3/2] bg-gray-100">
+                        <div class="relative w-full max-w-lg aspect-[4/3] bg-gray-100">
                             <img id="image" class="absolute inset-0 w-full h-full object-cover"
                                 src="{{ asset('storage/' . $trabajo->imagen) }}" />
                         </div>
