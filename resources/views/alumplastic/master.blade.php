@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="es" translate="no">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="google" content="notranslate">
 <title>Alumplastic</title>
 <link rel="icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
 <link rel="stylesheet" href="{{ asset('vendor/bootstrap/bootstrap.min.css') }}"/>
