@@ -36,7 +36,7 @@
                             <img id="image" class="absolute inset-0 w-full h-full object-cover"/>
                         </div>
                     </div>
-                    <div class="my-2 space-x-2 text-center">
+                    <div class="my-2 flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center">
                         <button type="button" id="rotateLeft"
                             class="bg-gray-500 hover:bg-gray-800 text-white font-semibold py-1 px-3 rounded">
                             Rotar Izquierda
