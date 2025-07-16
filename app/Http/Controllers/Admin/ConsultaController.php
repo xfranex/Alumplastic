@@ -49,7 +49,7 @@ class ConsultaController extends Controller
         if ($validacion->fails()) {
             return redirect()
                 ->route('welcome')
-                ->withFragment('4')
+                ->withFragment('controladorConsulta')
                 ->withErrors($validacion)
                 ->withInput();
         }

@@ -1,4 +1,4 @@
-<div class="testimonials">
+<div class="testimonials" data-scroll-index='4'>
   <div class="testimonials-overlay section-padding">
     <div class="container">
       <div class="row">

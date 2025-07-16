@@ -1,4 +1,4 @@
-<div class="contact section-padding" data-scroll-index='4'>
+<div class="contact section-padding" data-scroll-index='5'>
     <div class="container">
         <div class="row">
             <div class="col-md-12 section-title text-center">
@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="col-lg-7 col-md-8">
-                <div class="contact-form" id="4">
+                <div class="contact-form" id="controladorConsulta">
                     <form action="{{ route('consultas.store') }}" class='form' id='contact-form' method='post'>
                         @csrf
                         <div class="messages"></div>

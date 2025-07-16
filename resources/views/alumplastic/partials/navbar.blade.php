@@ -15,7 +15,8 @@
         <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="1">Conócenos</a> </li>
         <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="2">Productos</a> </li>
         <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="3">Trabajos</a> </li>
-        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="4">Contacto</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="4">Horario</a> </li>
+        <li class="nav-item"> <a class="nav-link" href="#" data-scroll-nav="5">Contacto</a> </li>
         <li class="nav-item"> <a class="nav-link" href="{{ route('login') }}">Administración</a> </li>
       </ul>
     </div>
