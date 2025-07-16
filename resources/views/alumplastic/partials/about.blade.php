@@ -12,7 +12,7 @@
             <h5>If you have right set of mind and thus you can rule the world. Cheers!</h5>
             <p>Nam non erat feugiat, pellentesque mi ut, finibus tellus. Ut eget ex sodales, feugiat elit non, semper ex. Sed laoreet lectus nisl, sit amet porttitor lacus porta nec. Quisque sit amet metus sagittis, tincidunt tellus in, efficitur lorem. Sed scelerisque tellus nisl, eget tincidunt elit aliquet vitae. Integer id felis ut ipsum tristique iaculis. Mauris sed nibh enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Nunc sagittis rhoncus sollicitudin. Maecenas eget dui a neque rutrum tincidunt sed non ipsum.</p>
           </div>
-          <a href="#" class="anchor-btn">Learn more <i class="fas fa-arrow-right pd-lt-10"></i></a> </div>
+        </div>
       </div>
       <div class="col-md-6 mb-50">
         <div class="section-img"> <img src="{{ asset('alumplastic/images/about.jpg') }}" alt="" class="img-responsive"/> </div>
