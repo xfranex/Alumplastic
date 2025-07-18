@@ -22,10 +22,10 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() 
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
     Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);
     Route::resource('carpinterias.productos', ProductoController::class)->except(['show'])->shallow();
+    Route::resource('productos.series', ProductoSerieController::class)->parameters(['series' => 'serie']);
     Route::resource('series', SerieController::class)->except(['show'])->parameters(['series' => 'serie']);
     Route::resource('trabajos', TrabajoController::class)->except(['show']);
     Route::resource('usuarios', UserController::class)->except(['create','store','show','destroy'])->parameters(['usuarios' => 'user']);
-    Route::resource('productos.series', ProductoSerieController::class)->shallow(); //proximo commit
 });
 
 require __DIR__.'/auth.php';
