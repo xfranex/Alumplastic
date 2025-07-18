@@ -74,7 +74,7 @@ class ProductoController extends Controller
         $manager = new ImageManager(new Driver());
         $imagen = $manager->read($request->cropped_image)->resize(1600, 900);
 
-        $nombreArchivo = 'producto_' . str_replace(' ', '_', $nombreSerie->nombre) . '_' . str_replace(' ', '_', $request->nombre) . '_' . $carpinteria->nombre . time() . '.webp';
+        $nombreArchivo = 'producto_' . str_replace(' ', '_', $nombreSerie->nombre) . '_' . str_replace(' ', '_', $request->nombre) . '_' . str_replace(' ', '_', $carpinteria->nombre) . time() . '.webp';
         $ruta = storage_path('app/public/productos/' . $nombreArchivo);
 
         if (!file_exists(storage_path('app/public/productos'))) {
