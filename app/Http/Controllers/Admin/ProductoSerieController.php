@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
+use App\Models\Serie;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ProductoSerieController extends Controller
@@ -61,8 +63,22 @@ class ProductoSerieController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Producto $producto, Serie $serie)
     {
-        //
+        $datosPivot = $producto->series()->where('series.id', $serie->id)->first()->pivot;
+        if ($datosPivot->imagen && Storage::disk('public')->exists($datosPivot->imagen)) {
+            Storage::disk('public')->delete($datosPivot->imagen);
+        }
+
+        $producto->series()->detach($serie->id); 
+
+        if ($producto->series()->count() === 0) {
+            $carpinteria = $producto->carpinteria;
+            $producto->delete();
+
+            return redirect()->route('carpinterias.productos.index', $carpinteria->id)->with('successSerieProductoDelete', 'Producto eliminado por falta de series asociadas');
+        }
+
+        return redirect()->route('productos.series.index', $producto)->with('successSerieProductoDelete', 'Serie eliminada correctamente');       
     }
 }

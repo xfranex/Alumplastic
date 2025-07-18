@@ -91,7 +91,7 @@
                                                 Editar
                                             </button>
                                         </a>
-                                        <form action="" method="POST" class="flex-1 min-w-[80px] max-w-[100px] botonEliminar">
+                                        <form action="{{ route('productos.series.destroy', ['producto' => $producto, 'serie' => $serie]) }}" method="POST" class="flex-1 min-w-[80px] max-w-[100px] botonEliminar">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">

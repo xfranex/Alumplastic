@@ -28,6 +28,11 @@
                 class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
                 <p class="text-sm font-semibold">{{ session('successProductoDelete') }}</p>
             </div>
+        @elseif(session('successSerieProductoDelete'))
+            <div id="success-message"
+                class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
+                <p class="text-sm font-semibold">{{ session('successSerieProductoDelete') }}</p>
+            </div>
         @endif
 
         <div class="shadow rounded border border-gray-200 mt-6 bg-white">
