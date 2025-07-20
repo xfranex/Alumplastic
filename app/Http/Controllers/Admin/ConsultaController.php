@@ -68,7 +68,7 @@ class ConsultaController extends Controller
             'mensaje' => $request->mensaje,
         ];
 
-        Mail::to('alumplastic@yahoo.es')->send(new ConsultaNueva($data));
+        Mail::to(env('EMAIL_DESTINATARIO'))->send(new ConsultaNueva($data));
         //el "to" es hacia quien va recibido
         return redirect()->route('welcome')->withFragment('controladorConsulta')->with('successContacto', 'Tu mensaje ha sido enviado correctamente');
     }
