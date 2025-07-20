@@ -83,13 +83,13 @@
 
                 cropper = new Cropper(image, {
                     aspectRatio: 600 / 400,
-                    viewMode: 1,
+                    viewMode: 2,
                     autoCropArea: 1,
                     movable: true,
                     zoomable: true,
                     rotatable: true,
                     scalable: false,
-                    background: false,
+                    background: true,
                     /*minCropBoxWidth: 600,
                     minCropBoxHeight: 400,
                     minContainerWidth: 600,

@@ -107,13 +107,13 @@
 
                 cropper = new Cropper(image, {
                     aspectRatio: 1600 / 900,
-                    viewMode: 1,
+                    viewMode: 2,
                     autoCropArea: 1,
                     movable: true,
                     zoomable: true,
                     rotatable: true,
                     scalable: false,
-                    background: false,
+                    background: true,
                     responsive: true,
                     cropBoxResizable: false
                 });
