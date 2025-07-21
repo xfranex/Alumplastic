@@ -81,7 +81,7 @@
                                 </td>
                                 <td class="py-4 px-2">
                                     <div class="flex flex-wrap justify-center gap-2">
-                                        <a href="" class="flex-1 min-w-[80px] max-w-[100px]">
+                                        <a href="{{ route('productos.series.show', ['producto' => $producto, 'serie' => $serie]) }}" class="flex-1 min-w-[80px] max-w-[100px]">
                                             <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">
                                                 Ver
                                             </button>

@@ -24,7 +24,7 @@
                 <div class="text-center">
                     <a href="{{ route('consultas.index') }}"
                         class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">
-                        ← Volver a Consultas
+                            Volver a Consultas
                     </a>
                 </div>
             </div>

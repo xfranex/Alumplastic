@@ -39,9 +39,11 @@ class ProductoSerieController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Producto $producto, Serie $serie)
     {
-        //
+        $serieRelacionada = $producto->series()->where('series.id', $serie->id)->first();
+        $carpinteria = $producto->carpinteria;
+        return view('admin.productos.series.show', ['carpinteria' => $carpinteria, 'producto' => $producto, 'serie' => $serieRelacionada]);
     }
 
     /**
