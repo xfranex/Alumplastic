@@ -15,18 +15,18 @@
                 <table class="min-w-full bg-white border-collapse table-fixed hidden md:table">
                     <thead class="bg-gray-800 text-white">
                         <tr>
-                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                            <th class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Nombre
                             </th>
-                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                            <th class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Teléfono</th>
-                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                            <th class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Email
                             </th>
                             <th
-                                class="w-2/6 text-center py-3 px-4 uppercase font-semibold text-sm truncate max-w-[15ch]">
+                                class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm truncate max-w-[15ch]">
                                 Mensaje</th>
-                            <th class="w-1/6 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
+                            <th class="w-1/5 text-center py-3 px-4 uppercase font-semibold text-sm whitespace-nowrap">
                                 Acciones</th>
                         </tr>
                     </thead>

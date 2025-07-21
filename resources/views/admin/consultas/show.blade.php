@@ -7,19 +7,19 @@
             <div class="bg-white p-6 rounded-b space-y-6 text-gray-700 w-full">
                 <div>
                     <h3 class="font-semibold text-gray-900">Nombre:</h3>
-                    <p class="break-words w-full">{{ $consulta->nombre }}</p>
+                    <p class="w-full">{{ $consulta->nombre }}</p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-900">Teléfono:</h3>
-                    <p class="break-words w-full">{{ $consulta->telefono }}</p>
+                    <p class="w-full">{{ $consulta->telefono }}</p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-900">Email:</h3>
-                    <p class="break-words w-full">{{ $consulta->email }}</p>
+                    <p class="w-full">{{ $consulta->email }}</p>
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-900">Mensaje:</h3>
-                    <p class="whitespace-pre-line break-words w-full">{{ $consulta->mensaje }}</p>
+                    <p class="whitespace-pre-line w-full">{{ $consulta->mensaje }}</p>
                 </div>
                 <div class="text-center">
                     <a href="{{ route('consultas.index') }}"
