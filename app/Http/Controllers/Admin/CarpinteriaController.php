@@ -14,6 +14,13 @@ class CarpinteriaController extends Controller
      */
     public function index()
     {
+        if (session()->has('formProducto') && session()->has('producto')) {
+            session()->forget(['formProducto', 'producto']);
+        }
+        if (session()->has('formProducto') && session()->has('carpinteria')) {
+            session()->forget(['formProducto', 'carpinteria']);
+        }
+        
         $carpinterias = Carpinteria::all();
         return view('admin.carpinterias.index', ['carpinterias' => $carpinterias]);
     }

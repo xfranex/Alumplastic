@@ -49,9 +49,9 @@
             </div>
         </div>
         <div class="flex justify-center mt-10">
-            <a href="">
+            <a href="{{ route('productos.series.create', $producto) }}">
                 <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
-                    Crear Serie
+                    Asociar Serie
                 </button>
             </a>
         </div>

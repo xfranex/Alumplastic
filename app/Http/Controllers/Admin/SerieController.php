@@ -17,6 +17,9 @@ class SerieController extends Controller
         if (session()->has('formProducto') && session()->has('carpinteria')) {
             session()->forget(['formProducto', 'carpinteria']);
         }
+        if (session()->has('formProducto') && session()->has('producto')) {
+            session()->forget(['formProducto', 'producto']);
+        }
 
         $series = Serie::all();
         return view('admin.series.index', ['series' => $series]);
@@ -55,6 +58,15 @@ class SerieController extends Controller
             session()->forget(['formProducto', 'carpinteria']);
 
             return redirect()->route('carpinterias.productos.create', $carpinteriaId)->with('formProducto', $formProducto);
+        }
+
+        if (session()->has('formProducto') && session()->has('producto')) {
+            $formProducto = session('formProducto');
+            $productoId = session('producto');
+
+            session()->forget(['formProducto', 'producto']);
+
+            return redirect()->route('productos.series.create', $productoId)->with('formProducto', $formProducto);
         }
 
         return redirect()->route('series.index')->with('successSerieStore', 'Serie creada correctamente');
