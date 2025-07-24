@@ -23,9 +23,19 @@
                 </div>
                 <div class="text-center">
                     <a href="{{ route('consultas.index') }}"
-                        class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow">
-                            Volver a Consultas
+                        class="inline-block w-40 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow mr-2 text-center">
+                        Volver
                     </a>
+                    @can('delete', $consulta)
+                        <form action="{{ route('consultas.destroy', $consulta) }}" method="POST" class="inline-block w-40">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow text-center botonEliminar">
+                                Eliminar
+                            </button>
+                        </form>
+                    @endcan
                 </div>
             </div>
         </div>

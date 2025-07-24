@@ -43,7 +43,7 @@ class SerieController extends Controller
         ],[
             'nombre.required' => 'El nombre de la serie es obligatorio',
             'nombre.string'   => 'El nombre debe ser una cadena de texto',
-            'nombre.unique'   => 'El nombre ya está registrado, por favor elige otro',
+            'nombre.unique'   => 'El nombre ya está registrado',
             'nombre.max'      => 'El nombre no debe superar los 255 caracteres',
         ]);
 
@@ -90,7 +90,7 @@ class SerieController extends Controller
         ], [
             'nombre.required' => 'El nombre de la serie es obligatorio',
             'nombre.string'   => 'El nombre debe ser una cadena de texto',
-            'nombre.unique'   => 'El nombre ya está registrado, por favor elige otro',
+            'nombre.unique'   => 'El nombre ya está registrado',
             'nombre.max'      => 'El nombre no debe superar los 255 caracteres',
         ]);
 

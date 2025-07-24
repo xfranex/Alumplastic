@@ -29,7 +29,7 @@
                     </div>
                     <div>
                         <label for="descripcion" class="block text-gray-700 font-semibold mb-2">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" rows="4" class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left">{{ old('descripcion', session('formProducto.descripcion')) }}</textarea>
+                        <textarea name="descripcion" id="descripcion" placeholder="Escriba una descripción" rows="4" class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left">{{ old('descripcion', session('formProducto.descripcion')) }}</textarea>
                         @error('descripcion')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror

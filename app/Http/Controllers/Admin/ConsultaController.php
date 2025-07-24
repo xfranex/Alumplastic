@@ -29,10 +29,10 @@ class ConsultaController extends Controller
     public function store(Request $request)
     {
         $validacion = Validator::make($request->all(), [
-            'nombre' => 'required|string|max:255|regex:/^[\pL\s\-]+$/u',
+            'nombre' => 'required|max:255|regex:/^[\pL\s\-]+$/u',
             'telefono' => 'required|digits:9',
             'email' => 'required|email|max:255',
-            'mensaje' => 'required|string|max:5000',
+            'mensaje' => 'required|max:5000',
         ], [
             'nombre.required' => 'El nombre es obligatorio',
             'nombre.max' => 'El nombre no puede tener más de 255 caracteres',
@@ -49,7 +49,7 @@ class ConsultaController extends Controller
         if ($validacion->fails()) {
             return redirect()
                 ->route('welcome')
-                ->withFragment('controladorConsulta')
+                ->withFragment('contacto')
                 ->withErrors($validacion)
                 ->withInput();
         }
@@ -70,7 +70,7 @@ class ConsultaController extends Controller
 
         Mail::to(env('EMAIL_DESTINATARIO'))->send(new ConsultaNueva($data));
         //el "to" es hacia quien va recibido
-        return redirect()->route('welcome')->withFragment('controladorConsulta')->with('successContacto', 'Tu mensaje ha sido enviado correctamente');
+        return redirect()->route('welcome')->withFragment('contacto')->with('successContacto', 'Tu mensaje ha sido enviado correctamente');
     }
 
     /**

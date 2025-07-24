@@ -32,8 +32,8 @@
                 </div>
             </div>
             <div class="col-lg-7 col-md-8">
-                <div class="contact-form" id="controladorConsulta">
-                    <form action="{{ route('consultas.store') }}" class='form' id='contact-form' method='post'>
+                <div class="contact-form" id="contacto">
+                    <form action="{{ route('consultas.store') }}" class='form' id='contact-form' method='post' novalidate>
                         @csrf
                         <div class="messages"></div>
                         <div class="controls">
@@ -49,7 +49,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
-                                        <input id="form_number" type="number" name="telefono" placeholder="Telefono *"
+                                        <input id="form_number" type="number" name="telefono" placeholder="Teléfono *"
                                             value="{{ old('telefono') }}">
                                         @error('telefono')
                                             <small class="text-danger">{{ $message }}</small>
