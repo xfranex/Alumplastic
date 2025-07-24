@@ -14,6 +14,9 @@ class CarpinteriaController extends Controller
      */
     public function index()
     {
+        if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
+            session()->forget(['formProducto', 'producto', 'serie']);
+        }
         if (session()->has('formProducto') && session()->has('producto')) {
             session()->forget(['formProducto', 'producto']);
         }

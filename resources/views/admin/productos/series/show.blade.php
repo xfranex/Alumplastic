@@ -3,7 +3,7 @@
         <div class="w-full flex justify-center my-4 space-x-2">
             <a href="{{ route('productos.series.index', $producto) }}">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
-                    Volver a Series de {{ strtolower($producto->nombre) }}
+                    Volver a Series de {{ $producto->nombre }}
                 </button>
             </a>
         </div>

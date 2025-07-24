@@ -3,20 +3,21 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="shadow rounded border border-gray-200 mt-6 bg-white">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
-                <h3 class="text-center font-semibold text-lg">Asociar Serie en {{ $producto->nombre }}</h3>
+                <h3 class="text-center font-semibold text-lg">Editar Serie {{ $serie->nombre }} del Producto {{ $producto->nombre }}-{{ $carpinteria->nombre }}</h3>
             </div>
             <div class="p-6">
-                <form id="form-producto" method="POST" action="{{ route('productos.series.store', $producto) }}" class="space-y-6" enctype="multipart/form-data">
+                <form id="form-producto" method="POST" action="{{ route('productos.series.update', ['producto' => $producto, 'serie' => $serie]) }}" class="space-y-6" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
                     <input type="hidden" name="accion" id="accion" value="">
                     <div>
                         <label for="serie_id" class="block text-gray-700 font-semibold mb-2">Serie</label>
                         <select name="serie_id" id="serie_id"
                             class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
                             <option value="">Seleccione una serie</option>
-                            @foreach ($series as $serie)
-                                <option value="{{ $serie->id }}" {{ old('serie_id') == $serie->id ? 'selected' : '' }}>
-                                    {{ $serie->nombre }}
+                            @foreach ($seriesT as $serieI)
+                                <option value="{{ $serieI->id }}" {{ old('serie_id', $serie->id ?? '') == $serieI->id ? 'selected' : '' }}>
+                                    {{ $serieI->nombre }}
                                 </option>
                             @endforeach
                         </select>
@@ -29,13 +30,13 @@
                     </div>
                     <div>
                         <label for="descripcion" class="block text-gray-700 font-semibold mb-2">Descripción</label>
-                        <textarea name="descripcion" id="descripcion" placeholder="Escriba una descripción" rows="4" class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left">{{ old('descripcion', session('formProducto.descripcion')) }}</textarea>
+                        <textarea name="descripcion" id="descripcion" placeholder="Escriba una descripción" rows="4" class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 text-left">{{ old('descripcion', session('formProducto.descripcion', $pivotAct->descripcion ?? '')) }}</textarea>
                         @error('descripcion')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div>
-                        <label for="inputImagen" class="block text-gray-700 font-semibold mb-2">Imagen</label>
+                        <label for="inputImagen" class="block text-gray-700 font-semibold mb-2">Nueva Imagen</label>
                         <input type="file" id="inputImagen" accept="image/*" name="imagen"
                             class="border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('imagen')
@@ -44,7 +45,8 @@
                     </div>
                     <div class="flex justify-center">
                         <div class="relative w-full max-w-lg aspect-[4/3] bg-gray-100">
-                            <img id="image" class="absolute inset-0 w-full h-full object-cover"/>
+                            <img id="image" class="absolute inset-0 w-full h-full object-cover"
+                                src="{{ asset('storage/' . $pivotAct->imagen) }}"/>
                         </div>
                     </div>
                     <div class="my-2 flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center">

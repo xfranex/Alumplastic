@@ -86,7 +86,7 @@
                                                 Ver
                                             </button>
                                         </a>
-                                        <a href="" class="flex-1 min-w-[80px] max-w-[100px]">
+                                        <a href="{{ route('productos.series.edit', ['producto' => $producto, 'serie' => $serie]) }}" class="flex-1 min-w-[80px] max-w-[100px]">
                                             <button class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">
                                                 Editar
                                             </button>

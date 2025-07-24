@@ -18,6 +18,9 @@ class ProductoController extends Controller
      */
     public function index(Carpinteria $carpinteria)
     {
+        if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
+            session()->forget(['formProducto', 'producto', 'serie']);
+        }
         if (session()->has('formProducto') && session()->has('carpinteria')) {
             session()->forget(['formProducto', 'carpinteria']);
         }

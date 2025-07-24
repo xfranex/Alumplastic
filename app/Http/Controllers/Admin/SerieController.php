@@ -14,6 +14,9 @@ class SerieController extends Controller
      */
     public function index()
     {
+        if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
+            session()->forget(['formProducto', 'producto', 'serie']);
+        }
         if (session()->has('formProducto') && session()->has('carpinteria')) {
             session()->forget(['formProducto', 'carpinteria']);
         }
@@ -50,6 +53,16 @@ class SerieController extends Controller
         Serie::create([
             'nombre' => strtoupper($request->nombre),
         ]);
+
+        if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
+            $formProducto = session('formProducto');
+            $productoId = session('producto');
+            $serieId = session('serie');
+
+            session()->forget(['formProducto', 'producto', 'serie']);
+
+            return redirect()->route('productos.series.edit', ['producto' => $productoId, 'serie' => $serieId])->with('formProducto', $formProducto);
+        }
 
         if (session()->has('formProducto') && session()->has('carpinteria')) {
             $formProducto = session('formProducto');

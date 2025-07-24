@@ -17,6 +17,9 @@ class ProductoSerieController extends Controller
      */
     public function index(Producto $producto)
     {
+        if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
+            session()->forget(['formProducto', 'producto', 'serie']);
+        }
         if (session()->has('formProducto') && session()->has('producto')) {
             session()->forget(['formProducto', 'producto']);
         }
@@ -104,17 +107,77 @@ class ProductoSerieController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Producto $producto, Serie $serie)
     {
-        //
+        $series = Serie::all();
+        $carpinteria = $producto->carpinteria;
+        $pivotAct = $producto->series()->where('series.id', $serie->id)->first()->pivot;
+
+        return view('admin.productos.series.edit', ['producto' => $producto, 'serie' => $serie, 'seriesT' => $series, 'pivotAct' => $pivotAct, 'carpinteria' => $carpinteria]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Producto $producto, Serie $serie)
     {
-        //
+        if ($request->accion === 'crear_serie') {
+            session([
+                'formProducto' => [
+                    'descripcion' => $request->descripcion,
+                ],
+                'producto' => $producto->id,
+                'serie' => $serie->id,
+            ]);
+
+            return redirect()->route('series.create');
+        }
+
+        $request->validate([
+            'serie_id' => 'required|exists:series,id|unique:producto_serie,serie_id,' . $serie->id . ',serie_id,producto_id,' . $producto->id,
+            'descripcion' => 'required',
+            'imagen' => 'required',
+        ], [
+            'serie_id.required' => 'Debe seleccionar una serie',
+            'serie_id.exists' => 'La serie seleccionada no es válida',
+            'serie_id.unique' => 'La serie ya está asociada',
+            'descripcion.required' => 'La descripción es obligatoria',
+            'imagen.required' => 'La imagen es obligatoria',
+        ]);
+
+        $pivotActual = $producto->series()->where('series.id', $serie->id)->first();
+        if ($pivotActual && $pivotActual->pivot->imagen && Storage::disk('public')->exists($pivotActual->pivot->imagen)) {
+            Storage::disk('public')->delete($pivotActual->pivot->imagen);
+        }
+
+        $manager = new ImageManager(new Driver());
+        $imagen = $manager->read($request->cropped_image)->resize(1600, 900);
+
+        $nombreSerie = Serie::findorFail($request->serie_id);
+        $carpinteria = $producto->carpinteria;
+        $nombreArchivo = 'producto_' . str_replace(' ', '_', strtoupper($nombreSerie->nombre)) . '_' . str_replace(' ', '_', strtoupper($producto->nombre)) . '_' . str_replace(' ', '_', strtoupper($carpinteria->nombre)) . time() . '.webp';
+        $ruta = storage_path('app/public/productos/' . $nombreArchivo);
+
+        if (!file_exists(storage_path('app/public/productos'))) {
+            mkdir(storage_path('app/public/productos'), 0755, true);
+        }
+
+        $imagen->toWebp(100)->save($ruta);
+
+        if ($serie->id != $request->serie_id) {
+            $producto->series()->detach($serie->id);
+            $producto->series()->attach($request->serie_id, [
+                'descripcion' => $request->descripcion,
+                'imagen' => 'productos/' . $nombreArchivo,
+            ]);
+        } else {
+            $producto->series()->updateExistingPivot($serie->id, [
+                'descripcion' => $request->descripcion,
+                'imagen' => 'productos/' . $nombreArchivo,
+            ]);
+        }
+
+        return redirect()->route('productos.series.index', $producto)->with('successSerieProductoUpdate', 'Asociación editada correctamente');
     }
 
     /**
