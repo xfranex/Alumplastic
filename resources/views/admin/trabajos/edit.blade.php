@@ -51,7 +51,7 @@
                     </div>
                     <input type="hidden" name="cropped_image" id="croppedImageInput" />
                     <div class="flex flex-col sm:flex-row justify-center sm:space-x-4 space-y-4 sm:space-y-0">
-                        <button type="submit"
+                        <button type="submit" id="btnGuardar"
                             class="w-full sm:w-auto bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded whitespace-nowrap">
                             Actualizar
                         </button>
@@ -113,6 +113,10 @@
         });
 
         document.getElementById('form-trabajo').addEventListener('submit', function(e) {
+            const btnGuardar = document.getElementById('btnGuardar');
+            btnGuardar.disabled = true;
+            btnGuardar.innerText = 'Actualizando...';
+
             cropper.getCroppedCanvas({
                 width: 600,
                 height: 400,
