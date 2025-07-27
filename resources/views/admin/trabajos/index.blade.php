@@ -87,7 +87,7 @@
                         </div>
                         <div class="mb-3 text-center">
                             <a href="{{ asset('storage/' . $trabajo->imagen) }}" target="_blank" class="text-blue-600 hover:underline font-semibold">
-                                Ver imagen
+                                Ver Imagen
                             </a>
                         </div>
                         @can('create', \App\Models\Trabajo::class)

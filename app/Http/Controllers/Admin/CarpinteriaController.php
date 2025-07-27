@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Carpinteria;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class CarpinteriaController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Carpinteria::class);
         if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
             session()->forget(['formProducto', 'producto', 'serie']);
         }
@@ -33,6 +36,7 @@ class CarpinteriaController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Carpinteria::class);
         return view('admin.carpinterias.create');
     }
 
@@ -41,6 +45,7 @@ class CarpinteriaController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Carpinteria::class);
         $request->validate([
             'nombre' => 'required|string|unique:carpinterias,nombre|max:255',
         ],[
@@ -62,6 +67,7 @@ class CarpinteriaController extends Controller
      */
     public function edit(Carpinteria $carpinteria)
     {
+        $this->authorize('update', Carpinteria::class);
         return view('admin.carpinterias.edit', ['carpinteria' => $carpinteria]);
     }
 
@@ -70,6 +76,7 @@ class CarpinteriaController extends Controller
      */
     public function update(Request $request, Carpinteria $carpinteria)
     {
+        $this->authorize('update', Carpinteria::class);
         $request->validate([
             'nombre' => 'required|string|max:255|unique:carpinterias,nombre,' . $carpinteria->id,
         ], [
@@ -89,6 +96,7 @@ class CarpinteriaController extends Controller
      */
     public function destroy(Carpinteria $carpinteria)
     {
+        $this->authorize('delete', Carpinteria::class);
         foreach ($carpinteria->productos as $producto) {
             foreach ($producto->series as $serie) {
                 if ($serie->pivot && $serie->pivot->imagen) {
