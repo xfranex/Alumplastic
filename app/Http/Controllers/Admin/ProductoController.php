@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carpinteria;
 use App\Models\Producto;
 use App\Models\Serie;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
@@ -13,11 +14,13 @@ use Intervention\Image\Drivers\Gd\Driver;
 
 class ProductoController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index(Carpinteria $carpinteria)
     {
+        $this->authorize('viewAny', Producto::class);
         if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
             session()->forget(['formProducto', 'producto', 'serie']);
         }
@@ -37,6 +40,7 @@ class ProductoController extends Controller
      */
     public function create(Carpinteria $carpinteria)
     {
+        $this->authorize('create', Producto::class);
         $series = Serie::all();
         return view('admin.productos.create', ['carpinteria' => $carpinteria, 'series' => $series]);
     }
@@ -46,6 +50,7 @@ class ProductoController extends Controller
      */
     public function store(Request $request, Carpinteria $carpinteria)
     {
+        $this->authorize('create', Producto::class);
         if ($request->accion === 'crear_serie') {
             session([
                 'formProducto' => [
@@ -106,6 +111,7 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
+        $this->authorize('update', Producto::class);
         $carpinteria = $producto->carpinteria;
         return view('admin.productos.edit', ['producto' => $producto, 'carpinteria' => $carpinteria]);
     }
@@ -115,6 +121,7 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
+        $this->authorize('update', Producto::class);
         $carpinteria = $producto->carpinteria;
         $request->validate([
             'nombre' => 'required|max:255|unique:productos,nombre,' . $producto->id . ',id,carpinteria_id,' . $producto->carpinteria_id,
@@ -135,6 +142,7 @@ class ProductoController extends Controller
      */
     public function destroy(Producto $producto)
     {
+        $this->authorize('delete', Producto::class);
         $carpinteria = $producto->carpinteria;
         foreach ($producto->series as $serie) {
             if ($serie->pivot->imagen && Storage::disk('public')->exists($serie->pivot->imagen)) {

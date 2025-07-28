@@ -4,7 +4,7 @@ namespace App\Policies;
 
 use App\Models\User;
 
-class ConsultaPolicy
+class ProductoPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -15,11 +15,19 @@ class ConsultaPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * Determine whether the user can create models.
      */
-    public function view(User $user): bool //show
+    public function create(User $user): bool //create store
     {
-        return $user->isAdmin() || $user->esEmpleado();
+        return $user->isAdmin();
+    }
+
+    /**
+     * Determine whether the user can update the model.
+     */
+    public function update(User $user): bool //edit update
+    {
+        return $user->isAdmin();
     }
 
     /**

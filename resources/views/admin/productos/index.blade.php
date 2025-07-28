@@ -1,11 +1,13 @@
 <x-app-layout>
     <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div class="w-full flex justify-center my-4 space-x-2">
-            <a href="{{ route('carpinterias.productos.create', $carpinteria) }}">
-                <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
-                    Crear Producto
-                </button>
-            </a>
+            @can('create', \App\Models\Producto::class)
+                <a href="{{ route('carpinterias.productos.create', $carpinteria) }}">
+                    <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
+                        Crear Producto
+                    </button>
+                </a>
+            @endcan
             <a href="{{ route('carpinterias.index') }}">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
                     Carpinterías
@@ -63,24 +65,27 @@
                                 </td>
                                 <td class="py-4 px-2 align-middle">
                                     <div class="flex justify-center gap-2 flex-wrap">
-                                        <a href="{{ route('productos.edit', $producto) }}" class="flex-1 min-w-[120px]">
-                                            <button
-                                                class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
-                                                Editar
-                                            </button>
-                                        </a>
-                                        <form action="{{ route('productos.destroy', $producto) }}" method="POST"
-                                            class="flex-1 min-w-[120px]">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-2 rounded botonEliminar">
-                                                Eliminar
-                                            </button>
-                                        </form>
+                                        @can('update', \App\Models\Producto::class)
+                                            <a href="{{ route('productos.edit', $producto) }}" class="flex-1 min-w-[120px]">
+                                                <button
+                                                    class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
+                                                    Editar
+                                                </button>
+                                            </a>
+                                        @endcan
+                                        @can('delete', \App\Models\Producto::class)
+                                            <form action="{{ route('productos.destroy', $producto) }}" method="POST"
+                                                class="flex-1 min-w-[120px]">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-2 rounded botonEliminar">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
-
                             </tr>
                         @endforeach
                     </tbody>
@@ -101,21 +106,25 @@
                             </a>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                            <a href="{{ route('productos.edit', $producto) }}" class="col-span-2">
-                                <button
-                                    class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
-                                    Editar
-                                </button>
-                            </a>
-                            <form action="{{ route('productos.destroy', $producto) }}" method="POST"
-                                class="col-span-2">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-2 rounded botonEliminar">
-                                    Eliminar
-                                </button>
-                            </form>
+                            @can('update', \App\Models\Producto::class)
+                                <a href="{{ route('productos.edit', $producto) }}" class="col-span-2">
+                                    <button
+                                        class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
+                                        Editar
+                                    </button>
+                                </a>
+                            @endcan
+                            @can('delete', \App\Models\Producto::class)
+                                <form action="{{ route('productos.destroy', $producto) }}" method="POST"
+                                    class="col-span-2">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-2 rounded botonEliminar">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 @endforeach
