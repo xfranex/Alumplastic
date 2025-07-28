@@ -48,13 +48,15 @@
                 </table>
             </div>
         </div>
-        <div class="flex justify-center mt-10">
-            <a href="{{ route('productos.series.create', $producto) }}">
-                <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
-                    Asociar Serie
-                </button>
-            </a>
-        </div>
+        @can('create', \App\Models\Producto::class)
+            <div class="flex justify-center mt-10">
+                <a href="{{ route('productos.series.create', $producto) }}">
+                    <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-4 rounded">
+                        Asociar Serie
+                    </button>
+                </a>
+            </div>
+        @endcan
         <div class="shadow rounded border border-gray-200 mt-4 bg-white">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t flex justify-center">
                 <h3 class="font-semibold text-lg text-center">Series Asociadas</h3>
@@ -86,18 +88,22 @@
                                                 Ver
                                             </button>
                                         </a>
-                                        <a href="{{ route('productos.series.edit', ['producto' => $producto, 'serie' => $serie]) }}" class="flex-1 min-w-[80px] max-w-[100px]">
-                                            <button class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">
-                                                Editar
-                                            </button>
-                                        </a>
-                                        <form action="{{ route('productos.series.destroy', ['producto' => $producto, 'serie' => $serie]) }}" method="POST" class="flex-1 min-w-[80px] max-w-[100px] botonEliminar">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">
-                                                Eliminar
-                                            </button>
-                                        </form>
+                                        @can('update', \App\Models\Producto::class)
+                                            <a href="{{ route('productos.series.edit', ['producto' => $producto, 'serie' => $serie]) }}" class="flex-1 min-w-[80px] max-w-[100px]">
+                                                <button class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">
+                                                    Editar
+                                                </button>
+                                            </a>
+                                        @endcan
+                                        @can('delete', \App\Models\Producto::class)
+                                            <form action="{{ route('productos.series.destroy', ['producto' => $producto, 'serie' => $serie]) }}" method="POST" class="flex-1 min-w-[80px] max-w-[100px] botonEliminar">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-1.5 px-2 rounded text-xs sm:text-sm">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>

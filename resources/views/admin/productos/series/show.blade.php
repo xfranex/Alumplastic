@@ -6,6 +6,16 @@
                     Volver a Series de {{ $producto->nombre }}
                 </button>
             </a>
+            @can('delete', \App\Models\Producto::class)
+                <form action="{{ route('productos.series.destroy', ['producto' => $producto, 'serie' => $serie]) }}" method="POST" class="inline-block w-40">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit"
+                        class="w-full bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded shadow text-center botonEliminar">
+                            Eliminar
+                    </button>
+                </form>
+            @endcan
         </div>
 
         <div class="shadow rounded border border-gray-200 bg-white">

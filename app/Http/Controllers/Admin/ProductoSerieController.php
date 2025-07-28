@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Producto;
 use App\Models\Serie;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use Intervention\Image\Drivers\Gd\Driver;
@@ -12,11 +13,13 @@ use Intervention\Image\ImageManager;
 
 class ProductoSerieController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index(Producto $producto)
     {
+        $this->authorize('viewAny', Producto::class);
         if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
             session()->forget(['formProducto', 'producto', 'serie']);
         }
@@ -37,6 +40,7 @@ class ProductoSerieController extends Controller
      */
     public function create(Producto $producto)
     {
+        $this->authorize('create', Producto::class);
         $series = Serie::all();
         return view('admin.productos.series.create', ['producto' => $producto, 'series' => $series]);
     }
@@ -46,6 +50,7 @@ class ProductoSerieController extends Controller
      */
     public function store(Request $request, Producto $producto)
     {
+        $this->authorize('create', Producto::class);
         if ($request->accion === 'crear_serie') {
             session([
                 'formProducto' => [
@@ -99,6 +104,7 @@ class ProductoSerieController extends Controller
      */
     public function show(Producto $producto, Serie $serie)
     {
+        $this->authorize('view', Producto::class);
         $serieRelacionada = $producto->series()->where('series.id', $serie->id)->first();
         $carpinteria = $producto->carpinteria;
         return view('admin.productos.series.show', ['carpinteria' => $carpinteria, 'producto' => $producto, 'serie' => $serieRelacionada]);
@@ -109,6 +115,7 @@ class ProductoSerieController extends Controller
      */
     public function edit(Producto $producto, Serie $serie)
     {
+        $this->authorize('update', Producto::class);
         $series = Serie::all();
         $carpinteria = $producto->carpinteria;
         $pivotAct = $producto->series()->where('series.id', $serie->id)->first()->pivot;
@@ -121,6 +128,7 @@ class ProductoSerieController extends Controller
      */
     public function update(Request $request, Producto $producto, Serie $serie)
     {
+        $this->authorize('update', Producto::class);
         if ($request->accion === 'crear_serie') {
             session([
                 'formProducto' => [
@@ -185,6 +193,7 @@ class ProductoSerieController extends Controller
      */
     public function destroy(Producto $producto, Serie $serie)
     {
+        $this->authorize('delete', Producto::class);
         $datosPivot = $producto->series()->where('series.id', $serie->id)->first()->pivot;
         if ($datosPivot->imagen && Storage::disk('public')->exists($datosPivot->imagen)) {
             Storage::disk('public')->delete($datosPivot->imagen);

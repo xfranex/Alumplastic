@@ -13,6 +13,14 @@ class ProductoPolicy
     {
         return $user->isAdmin() || $user->esEmpleado();
     }
+    
+    /**
+     * Determine whether the user can view the model.
+     */
+    public function view(User $user): bool //show
+    {
+        return $user->isAdmin() || $user->esEmpleado();
+    }
 
     /**
      * Determine whether the user can create models.

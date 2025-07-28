@@ -2,8 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\Carpinteria;
 use App\Models\Consulta;
+use App\Models\Producto;
+use App\Models\Serie;
+use App\Models\Trabajo;
+use App\Models\User;
+use App\Policies\CarpinteriaPolicy;
 use App\Policies\ConsultaPolicy;
+use App\Policies\ProductoPolicy;
+use App\Policies\SeriePolicy;
+use App\Policies\TrabajoPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Support\ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
@@ -15,6 +25,11 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Consulta::class => ConsultaPolicy::class,
+        Carpinteria::class => CarpinteriaPolicy::class,
+        Producto::class => ProductoPolicy::class,
+        Serie::class => SeriePolicy::class,
+        Trabajo::class => TrabajoPolicy::class,
+        User::class => UserPolicy::class,
     ];
 
     /**
