@@ -1,11 +1,13 @@
 <x-app-layout>
     <div class="px-4 py-2"></div>
     <div class="flex justify-center mt-4 space-x-3">
-        <a href="{{ route('series.create') }}">
-            <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
-                Crear Serie
-            </button>
-        </a>
+        @can('create', \App\Models\Serie::class)
+            <a href="{{ route('series.create') }}">
+                <button class="bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded">
+                    Crear Serie
+                </button>
+            </a>
+        @endcan
         <a href="{{ route('carpinterias.index') }}">
             <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
                 Carpinterías
@@ -53,20 +55,24 @@
                                 </td>
                                 <td class="text-center py-3 px-4 whitespace-nowrap">
                                     <div class="flex justify-center space-x-2">
-                                        <a href="{{ route('series.edit', $serie) }}">
-                                            <button
-                                                class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
-                                                Editar
-                                            </button>
-                                        </a>
-                                        <form action="{{ route('series.destroy', $serie) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit"
-                                                class="min-w-[100px] bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap botonEliminar">
-                                                Eliminar
-                                            </button>
-                                        </form>
+                                        @can('update', \App\Models\Serie::class)
+                                            <a href="{{ route('series.edit', $serie) }}">
+                                                <button
+                                                    class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
+                                                    Editar
+                                                </button>
+                                            </a>
+                                        @endcan
+                                        @can('delete', \App\Models\Serie::class)
+                                            <form action="{{ route('series.destroy', $serie) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="min-w-[100px] bg-red-500 hover:bg-red-700 text-white font-semibold py-1 px-3 rounded whitespace-nowrap botonEliminar">
+                                                    Eliminar
+                                                </button>
+                                            </form>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -83,20 +89,24 @@
                             <span class="break-words">{{ $serie->nombre }}</span>
                         </div>
                         <div class="flex flex-col space-y-2 items-center">
-                            <a href="{{ route('series.edit', $serie) }}">
-                                <button
-                                    class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
-                                    Editar
-                                </button>
-                            </a>
-                            <form action="{{ route('series.destroy', $serie) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit"
-                                    class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded min-w-[120px] botonEliminar">
-                                    Eliminar
-                                </button>
-                            </form>
+                            @can('update', \App\Models\Serie::class)
+                                <a href="{{ route('series.edit', $serie) }}">
+                                    <button
+                                        class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
+                                        Editar
+                                    </button>
+                                </a>
+                            @endcan
+                            @can('delete', \App\Models\Serie::class)
+                                <form action="{{ route('series.destroy', $serie) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded min-w-[120px] botonEliminar">
+                                        Eliminar
+                                    </button>
+                                </form>
+                            @endcan
                         </div>
                     </div>
                 @endforeach

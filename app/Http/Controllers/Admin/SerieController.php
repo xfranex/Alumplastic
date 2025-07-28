@@ -4,16 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Serie;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class SerieController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Serie::class);
         if (session()->has('formProducto') && session()->has('producto') && session()->has('serie')) {
             session()->forget(['formProducto', 'producto', 'serie']);
         }
@@ -33,6 +36,7 @@ class SerieController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Serie::class);
         return view('admin.series.create');
     }
 
@@ -41,6 +45,7 @@ class SerieController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Serie::class);
         $request->validate([
             'nombre' => 'required|string|unique:series,nombre|max:255',
         ],[
@@ -90,6 +95,7 @@ class SerieController extends Controller
      */
     public function edit(Serie $serie)
     {
+        $this->authorize('update', Serie::class);
         return view('admin.series.edit', ['serie' => $serie]);
     }
 
@@ -98,6 +104,7 @@ class SerieController extends Controller
      */
     public function update(Request $request, Serie $serie)
     {
+        $this->authorize('update', Serie::class);
         $request->validate([
             'nombre' => 'required|string|max:255|unique:series,nombre,' . $serie->id,
         ], [
@@ -117,6 +124,7 @@ class SerieController extends Controller
      */
     public function destroy(Serie $serie)
     {
+        $this->authorize('delete', Serie::class);
         $productos = $serie->productos;
 
         foreach ($productos as $producto) {
