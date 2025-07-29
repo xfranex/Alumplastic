@@ -42,14 +42,11 @@ class TrabajoController extends Controller
         $this->authorize('create', Trabajo::class);
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
-            'imagen' => 'required|image|mimes:png,jpg,jpeg,webp|dimensions:min_width=600,min_height=400'
+            'cropped_image' => 'required',
         ], [
             'carpinteria_id.required' => 'La carpintería es obligatoria',
             'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
-            'imagen.required' => 'La imagen es obligatoria',
-            'imagen.image' => 'Debe ser una imagen válida',
-            'imagen.mimes' => 'El tipo de archivo no es correcto',
-            'imagen.dimensions' => 'La imagen debe tener al menos 600x400 px',
+            'cropped_image.required' => 'La imagen es obligatoria',
         ]);
 
         //instancia creada del gestor de imagenes junto la carga base64 y redimensionar
@@ -84,8 +81,12 @@ class TrabajoController extends Controller
     public function edit(Trabajo $trabajo)
     {
         $this->authorize('update', Trabajo::class);
+        $ruta = storage_path('app/public/' . $trabajo->imagen);
+        $manager = new ImageManager(new Driver());
+        $imagen = $manager->read($ruta)->toWebp();
+        $imagenBase64 = 'data:image/webp;base64,' . base64_encode($imagen);
         $carpinterias = Carpinteria::all();
-        return view('admin.trabajos.edit', ['carpinterias' => $carpinterias, 'trabajo' => $trabajo]);
+        return view('admin.trabajos.edit', ['carpinterias' => $carpinterias, 'trabajo' => $trabajo, 'imagenBase64' => $imagenBase64]);
     }
 
     /**
@@ -96,11 +97,11 @@ class TrabajoController extends Controller
         $this->authorize('update', Trabajo::class);
         $request->validate([
             'carpinteria_id' => 'required|exists:carpinterias,id',
-            'imagen' => 'required'
+            'cropped_image' => 'required',
         ], [
             'carpinteria_id.required' => 'La carpintería es obligatoria',
             'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
-            'imagen.required' => 'La imagen es obligatoria',
+            'cropped_image.required' => 'La imagen es obligatoria',
         ]);
 
         //elimina la imagen anterior si existe

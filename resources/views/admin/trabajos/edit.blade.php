@@ -26,17 +26,17 @@
                         @enderror
                     </div>
                     <div>
-                        <label for="imagenSubir" class="block text-gray-700 font-semibold mb-2">Nueva Imagen</label>
+                        <label for="imagenSubir" class="block text-gray-700 font-semibold mb-2">Imagen</label>
                         <input type="file" id="imagenSubir" accept="image/*" name="imagen"
                             class="border-gray-300 rounded px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        @error('imagen')
+                        @error('cropped_image')
                             <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
                     <div class="flex justify-center">
                         <div class="relative w-full max-w-lg aspect-[4/3] bg-gray-100">
                             <img id="image" class="absolute inset-0 w-full h-full object-cover"
-                                src="{{ asset('storage/' . $trabajo->imagen) }}" />
+                                src="{{ old('cropped_image') ?: asset('storage/' . $trabajo->imagen) }}"/>
                         </div>
                     </div>
                     <div class="my-2 flex flex-col space-y-2 sm:flex-row sm:space-x-2 sm:space-y-0 justify-center">
@@ -49,7 +49,7 @@
                             Rotar Derecha
                         </button>
                     </div>
-                    <input type="hidden" name="cropped_image" id="croppedImageInput" />
+                    <input type="hidden" name="cropped_image" id="croppedImageInput" value="{{ old('cropped_image', $imagenBase64) }}"/>
                     <div class="flex flex-col sm:flex-row justify-center sm:space-x-4 space-y-4 sm:space-y-0">
                         <button type="submit" id="btnGuardar"
                             class="w-full sm:w-auto bg-green-600 hover:bg-green-800 text-white font-semibold py-2 px-6 rounded whitespace-nowrap">

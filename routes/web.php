@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\ProductoSerieController;
 use App\Http\Controllers\Admin\SerieController;
 use App\Http\Controllers\Admin\TrabajoController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,7 +18,11 @@ Route::post('consultas', [ConsultaController::class, 'store'])->name('consultas.
 
 Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() {
     Route::get('/', function () {
-        return redirect()->route('consultas.index');
+        if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->esEmpleado())) {
+            return redirect()->route('consultas.index');
+        } else {
+            return redirect()->route('welcome');
+        }
     })->name('dashboard');
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
     Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);
