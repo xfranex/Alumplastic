@@ -55,6 +55,7 @@ class ProductoSerieController extends Controller
             session([
                 'formProducto' => [
                     'descripcion' => $request->descripcion,
+                    'cropped_image' => $request->cropped_image,
                 ],
                 'producto' => $producto->id,
             ]);
@@ -65,15 +66,13 @@ class ProductoSerieController extends Controller
         $request->validate([
             'serie_id' => 'required|exists:series,id|unique:producto_serie,serie_id,NULL,id,producto_id,' . $producto->id,
             'descripcion' => 'required',
-            'imagen' => 'required|image|mimes:png,jpg,jpeg,webp',
+            'cropped_image' => 'required',
         ], [
             'serie_id.required' => 'Debe seleccionar una serie',
             'serie_id.exists' => 'La serie seleccionada no es válida',
             'serie_id.unique' => 'La serie ya está asociada',
             'descripcion.required' => 'La descripción es obligatoria',
-            'imagen.required' => 'La imagen es obligatoria',
-            'imagen.image' => 'Debe ser una imagen válida',
-            'imagen.mimes' => 'El tipo de archivo no es correcto',
+            'cropped_image.required' => 'La imagen es obligatoria',
         ]);
         
         $nombreSerie = Serie::findorFail($request->serie_id);
