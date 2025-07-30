@@ -56,6 +56,7 @@ class ProductoController extends Controller
                 'formProducto' => [
                     'nombre' => $request->nombre,
                     'descripcion' => $request->descripcion,
+                    'cropped_image' => $request->cropped_image,
                 ],
                 'carpinteria' => $carpinteria->id,
             ]);
@@ -67,7 +68,7 @@ class ProductoController extends Controller
             'nombre' => 'required|max:255|unique:productos,nombre,NULL,id,carpinteria_id,' . $carpinteria->id,
             'serie_id' => 'required|exists:series,id',
             'descripcion' => 'required',
-            'imagen' => 'required|image|mimes:png,jpg,jpeg,webp',
+            'cropped_image' => 'required',
         ], [
             'nombre.required' => 'El nombre del producto es obligatorio',
             'nombre.max' => 'El nombre es demasiado largo',
@@ -75,9 +76,7 @@ class ProductoController extends Controller
             'serie_id.required' => 'Debe seleccionar una serie',
             'serie_id.exists' => 'La serie seleccionada no es válida',
             'descripcion.required' => 'La descripción es obligatoria',
-            'imagen.required' => 'La imagen es obligatoria',
-            'imagen.image' => 'Debe ser una imagen válida',
-            'imagen.mimes' => 'El tipo de archivo no es correcto',
+            'cropped_image.required' => 'La imagen es obligatoria',
         ]);
         
         $nombreSerie = Serie::findorFail($request->serie_id);
