@@ -118,8 +118,11 @@ class ProductoSerieController extends Controller
         $series = Serie::all();
         $carpinteria = $producto->carpinteria;
         $pivotAct = $producto->series()->where('series.id', $serie->id)->first()->pivot;
-
-        return view('admin.productos.series.edit', ['producto' => $producto, 'serie' => $serie, 'seriesT' => $series, 'pivotAct' => $pivotAct, 'carpinteria' => $carpinteria]);
+        $ruta = storage_path('app/public/' . $pivotAct->imagen);
+        $manager = new ImageManager(new Driver());
+        $imagen = $manager->read($ruta)->toWebp();
+        $imagenBase64 = 'data:image/webp;base64,' . base64_encode($imagen);
+        return view('admin.productos.series.edit', ['producto' => $producto, 'serie' => $serie, 'seriesT' => $series, 'pivotAct' => $pivotAct, 'carpinteria' => $carpinteria, 'imagenBase64' => $imagenBase64]);
     }
 
     /**
@@ -132,6 +135,7 @@ class ProductoSerieController extends Controller
             session([
                 'formProducto' => [
                     'descripcion' => $request->descripcion,
+                    'cropped_image' => $request->cropped_image,
                 ],
                 'producto' => $producto->id,
                 'serie' => $serie->id,
@@ -143,13 +147,13 @@ class ProductoSerieController extends Controller
         $request->validate([
             'serie_id' => 'required|exists:series,id|unique:producto_serie,serie_id,' . $serie->id . ',serie_id,producto_id,' . $producto->id,
             'descripcion' => 'required',
-            'imagen' => 'required',
+            'cropped_image' => 'required',
         ], [
             'serie_id.required' => 'Debe seleccionar una serie',
             'serie_id.exists' => 'La serie seleccionada no es válida',
             'serie_id.unique' => 'La serie ya está asociada',
             'descripcion.required' => 'La descripción es obligatoria',
-            'imagen.required' => 'La imagen es obligatoria',
+            'cropped_image.required' => 'La imagen es obligatoria',
         ]);
 
         $pivotActual = $producto->series()->where('series.id', $serie->id)->first();
