@@ -1,13 +1,13 @@
 <x-app-layout>
     <div class="max-w-5xl mx-auto px-4 py-8">
-        <div class="w-full flex justify-center my-4 space-x-2">
-            <a href="{{ route('productos.series.index', $producto) }}">
-                <button class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded">
+        <div class="w-full flex flex-col md:flex-row items-center justify-center my-4 space-y-2 md:space-y-0 md:space-x-2">
+            <a href="{{ route('productos.series.index', $producto) }}" class="w-48">
+                <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
                     Volver a Series de {{ $producto->nombre }}
                 </button>
             </a>
             @can('delete', \App\Models\Producto::class)
-                <form action="{{ route('productos.series.destroy', ['producto' => $producto, 'serie' => $serie]) }}" method="POST" class="inline-block w-40">
+                <form action="{{ route('productos.series.destroy', ['producto' => $producto, 'serie' => $serie]) }}" method="POST" class="inline-block w-48">
                     @csrf
                     @method('DELETE')
                     <button type="submit"

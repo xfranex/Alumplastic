@@ -21,9 +21,9 @@
                     <h3 class="font-semibold text-gray-900">Mensaje:</h3>
                     <p class="whitespace-pre-line w-full">{{ $consulta->mensaje }}</p>
                 </div>
-                <div class="text-center">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-2">
                     <a href="{{ route('consultas.index') }}"
-                        class="inline-block w-40 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow mr-2 text-center">
+                        class="w-40 bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded shadow text-center">
                         Volver
                     </a>
                     @can('delete', $consulta)
