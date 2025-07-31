@@ -3,7 +3,7 @@
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="shadow rounded border border-gray-200 mt-6 bg-white">
             <div class="bg-gray-800 text-white py-3 px-4 rounded-t">
-                <h3 class="text-center font-semibold text-lg">Editar Producto {{$producto->nombre}}</h3>
+                <h3 class="text-center font-semibold text-lg">Editar Producto {{$producto->nombre}}-{{$carpinteria->nombre}}</h3>
             </div>
             <div class="p-6">
                 <form action="{{ route('productos.update', $producto) }}" method="POST" class="space-y-6">

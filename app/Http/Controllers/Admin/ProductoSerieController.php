@@ -42,7 +42,8 @@ class ProductoSerieController extends Controller
     {
         $this->authorize('create', Producto::class);
         $series = Serie::all();
-        return view('admin.productos.series.create', ['producto' => $producto, 'series' => $series]);
+        $carpinteria = $producto->carpinteria;
+        return view('admin.productos.series.create', ['producto' => $producto, 'series' => $series, 'carpinteria' => $carpinteria]);
     }
 
     /**

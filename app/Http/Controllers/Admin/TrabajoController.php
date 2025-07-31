@@ -86,7 +86,8 @@ class TrabajoController extends Controller
         $imagen = $manager->read($ruta)->toWebp();
         $imagenBase64 = 'data:image/webp;base64,' . base64_encode($imagen);
         $carpinterias = Carpinteria::all();
-        return view('admin.trabajos.edit', ['carpinterias' => $carpinterias, 'trabajo' => $trabajo, 'imagenBase64' => $imagenBase64]);
+        $carpinteria = $trabajo->carpinteria;
+        return view('admin.trabajos.edit', ['carpinterias' => $carpinterias, 'trabajo' => $trabajo, 'imagenBase64' => $imagenBase64, 'carpinteria' => $carpinteria]);
     }
 
     /**
