@@ -12,7 +12,7 @@ html {
 }
 body {
 	color: #888888;
-	font-size: 15px;
+	font-size: 20px;
 	font-family: "Poppins", sans-serif;
 	height: 100%;
 	overflow-x: hidden;
@@ -65,7 +65,7 @@ p {
 	margin: 0;
 }
 h1 {
-	font-size: 40px;
+	font-size: 50px;
 }
 h2 {
 	font-size: 35px;
@@ -175,7 +175,7 @@ h6 {
 	padding: 12px 45px;
 	cursor: pointer;
 	-webkit-transition: all 0.3s ease-in-out;
-	font-size: 15px;
+	font-size: 18px;
 	border-radius: 30px;
 	margin-top: 30px;
 	color: white;
@@ -493,8 +493,9 @@ h6 {
 	background: #ab2f52 !important;
 }
 .info-box {
-	position:relative;
-	padding-bottom:30px;
+	display: flex;
+	align-items: flex-start;
+	padding-bottom: 30px;
 }
 .info-box .icon {
 	display:inline-block;
@@ -556,6 +557,12 @@ h6 {
 .nav-scroll .navbar-collapse {
 	background: #fff !important;
 }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .logo-1 {
+    width: 180px;
+    height: auto;
+  }
 }
 @media all and (max-width:768px) {
 .nav-scroll .navbar-brand img, .navbar-brand img{

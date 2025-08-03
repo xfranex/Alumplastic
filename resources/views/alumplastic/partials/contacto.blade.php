@@ -6,7 +6,7 @@
                 <p>Rellene todos los datos y nos pondremos en contacto lo antes posible con usted</p>
                 <span class="section-title-line"></span>
             </div>
-            <div class="col-lg-5 col-md-4">
+            <div class="col-lg-5 col-md-5 pr-4">
                 <div class="part-info">
                     <div class="info-box">
                         <div class="icon"> <i class="fas fa-phone"></i> </div>
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-7 col-md-8">
+            <div class="col-lg-7 col-md-7 pl-4">
                 <div class="contact-form" id="contacto">
                     <form action="{{ route('consultas.store') }}" class='form' id='contact-form' method='post' novalidate>
                         @csrf

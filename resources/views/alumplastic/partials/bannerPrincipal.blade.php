@@ -1,8 +1,8 @@
 <div class="banner text-center" data-scroll-index='0'>
   <div class="banner-overlay">
     <div class="container">
-      <h1 class="text-capitalize">Best Template for Creative Business</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec justo rhoncus, pharetra dui ut, cursus turpis. Aenean tincidunt vitae ligula eget congue.</p>
+      <h1 class="text-capitalize">ALUMINIOS & PVC</h1>
+      <p>FÁBRICA DE VENTANAS PUERTAS Y CERRAMIENTOS</p>
       <a data-scroll-nav="5" class="banner-btn">Contacto</a> </div>
   </div>
 </div>
