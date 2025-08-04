@@ -12,6 +12,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/owl.carousel.min.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/owl.theme.default.min.css') }}"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@vite(['resources/js/productos/app.jsx'])
 </head>
 
 <body>
@@ -23,6 +24,7 @@
   <div class="container">
     <div class="row justify-content-center">
       @include('alumplastic.partials.cuadradosProductos') <!--foreach hacer-->
+      <div id="productos-react"></div>
     </div>
   </div>
 </div>
