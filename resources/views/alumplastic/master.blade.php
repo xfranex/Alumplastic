@@ -19,15 +19,7 @@
 @include('alumplastic.partials.navbar')
 @include('alumplastic.partials.bannerPrincipal')
 @include('alumplastic.partials.about')
-
-<div class="services section-padding bg-grey" data-scroll-index="2">
-  <div class="container">
-    <div class="row justify-content-center">
-      @include('alumplastic.partials.cuadradosProductos') <!--foreach hacer-->
-      <div id="productos-react"></div>
-    </div>
-  </div>
-</div>
+@include('alumplastic.partials.productos')
 
 <x-galeria-trabajos/>
 
