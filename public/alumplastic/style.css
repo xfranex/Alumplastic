@@ -35,6 +35,11 @@ img {
 .minimoAltura {
 	min-height: 250px;
 }
+#tituloProductos {
+	font-weight: 300;
+	font-size: 28px !important;
+	color: #1F2937;
+}
 @keyframes colorProductos {
   0% {
     background-color: #ffffff;
