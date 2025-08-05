@@ -1,14 +1,18 @@
 import React from 'react';
-import Cuadrado from './componentes/Cuadrado';
+import { Routes, Route } from 'react-router-dom';
+import Carpinterias from './paginas/Carpinterias';
 
-export default function Home() {
+const Home = () => {
     return (
         <div className="services section-padding bg-grey">
             <div className="container">
                 <div className="row justify-content-center">
-                    <Cuadrado />
+                    <Routes>
+                        <Route path='/' element={<Carpinterias/>}/>
+                    </Routes>
                 </div>
             </div>
         </div>
     );
 }
+export default Home;

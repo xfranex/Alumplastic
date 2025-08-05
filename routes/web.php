@@ -14,6 +14,10 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::get('/productos/{any}', function () {
+    return view('welcome'); //ya no busca rutas internas pasa el control a React
+})->where('any', '.*');
+
 Route::post('consultas', [ConsultaController::class, 'store'])->name('consultas.store');
 
 Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() {
