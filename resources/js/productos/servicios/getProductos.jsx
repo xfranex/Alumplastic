@@ -1,7 +1,7 @@
-import { token } from './token';
+import { token } from './token'
 
 export function getProductos(id) {
-    return fetch(`http://localhost:8000/api/v1/carpinterias/${id}/productos`, {
+    return fetch(`/api/v1/carpinterias/${id}/productos`, {
         headers: {
             'Content-Type': 'application/json',
             'token-alumplastic': token
