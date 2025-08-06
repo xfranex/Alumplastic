@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Cuadrado = (props) => {
     return (
@@ -10,6 +10,6 @@ const Cuadrado = (props) => {
                 </div>
             </Link>
         </div>
-    );
+    )
 }
-export default Cuadrado;
+export default Cuadrado

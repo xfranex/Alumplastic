@@ -1,7 +1,7 @@
-import React from 'react';
-import Ajax from '../componentes/Ajax';
-import useCarpinterias from '../hooks/useCarpinterias';
-import Cuadrado from '../componentes/Cuadrado';
+import React from 'react'
+import Ajax from '../componentes/Ajax'
+import useCarpinterias from '../hooks/useCarpinterias'
+import Cuadrado from '../componentes/Cuadrado'
 
 const Carpinterias = () => {
     const {buscando, carpinterias} = useCarpinterias()
@@ -16,4 +16,4 @@ const Carpinterias = () => {
         </>
     )
 }
-export default Carpinterias;
+export default Carpinterias

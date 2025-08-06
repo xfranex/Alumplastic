@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const Ajax = () => {
     return (
@@ -9,4 +9,4 @@ const Ajax = () => {
         </div>
     )
 }
-export default Ajax;
+export default Ajax

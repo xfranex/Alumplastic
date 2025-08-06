@@ -1,12 +1,11 @@
-import React from 'react';
-import Ajax from '../componentes/Ajax';
-import Cuadrado from '../componentes/Cuadrado';
+import React from 'react'
+import Ajax from '../componentes/Ajax'
+import Cuadrado from '../componentes/Cuadrado'
 import useProductos from '../hooks/useProductos'
-import { useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom'
 
-
-const Producto = () => {
-    let { id } = useParams();
+const Productos = () => {
+    let { id } = useParams()
     const {buscando, productos} = useProductos(id)
 
     function pintarCuadrados(elemento, index) {
@@ -19,4 +18,4 @@ const Producto = () => {
         </>
     )    
 }
-export default Producto;
+export default Productos

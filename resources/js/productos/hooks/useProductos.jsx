@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { getProductos } from "../servicios/getProductos";
+import { useState, useEffect } from "react"
+import { getProductos } from "../servicios/getProductos"
 
 const useProductos = (id) => {
     const [buscando, setBuscando] = useState(false)
@@ -16,4 +16,4 @@ const useProductos = (id) => {
     useEffect(rellenarProductos, [id])
     return {buscando, productos}
 }
-export default useProductos;
+export default useProductos

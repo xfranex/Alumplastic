@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { getCarpinterias } from "../servicios/getCarpinterias";
+import { useState, useEffect } from "react"
+import { getCarpinterias } from "../servicios/getCarpinterias"
 
 const useCarpinterias = () => {
     const [buscando, setBuscando] = useState(false)
@@ -16,4 +16,4 @@ const useCarpinterias = () => {
     useEffect(rellenarCarpinterias, [])
     return {buscando, carpinterias}
 }
-export default useCarpinterias;
+export default useCarpinterias
