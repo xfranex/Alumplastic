@@ -16,7 +16,7 @@ class TokenApi
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->header('token-alumplastic') !== env('TOKEN_API')) {
-            return response()->json(['error' => 'No autorizado'], 401);
+            abort(404);
         }
         
         return $next($request);
