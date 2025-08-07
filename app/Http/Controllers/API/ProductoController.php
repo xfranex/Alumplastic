@@ -7,10 +7,24 @@ use App\Models\Producto;
 
 class ProductoController extends Controller
 {
-    public function series($id)
+    public function series($producto)
     {
-        $producto = Producto::find($id);
-        $series = $producto->series()->select('series.id', 'series.nombre')->get();  
+        $producto = Producto::find($producto);
+        $series = $producto->series()->select('series.id', 'series.nombre')->get()->makeHidden('pivot');  
+        
         return response()->json($series);
+    }
+
+    public function virsualizar($producto, $serie)
+    {
+        $producto = Producto::find($producto);
+        $serie = $producto->series()->where('serie_id', $serie)->first();
+
+        return response()->json([
+            'producto_id' => $serie->pivot->producto_id,
+            'serie_id' => $serie->pivot->serie_id,
+            'descripcion' => $serie->pivot->descripcion,
+            'imagen' => $serie->pivot->imagen,
+        ]);
     }
 }

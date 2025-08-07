@@ -8,7 +8,7 @@ use App\Models\Producto;
 
 class CarpinteriaController extends Controller
 {
-    public function index()
+    public function carpinterias()
     {
         $carpinterias = Carpinteria::select('id', 'nombre')->has('productos')->get();
         
@@ -21,9 +21,10 @@ class CarpinteriaController extends Controller
         return response()->json($carpinterias);
     }
 
-    public function productos($id)
+    public function productos($carpinteria)
     {
-        $productos = Producto::where('carpinteria_id', $id)->select('id','nombre')->get();
+        $productos = Producto::where('carpinteria_id', $carpinteria)->select('id','nombre')->get();
+        
         return response()->json($productos);
     }
 }
