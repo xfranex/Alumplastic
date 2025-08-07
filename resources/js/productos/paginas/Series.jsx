@@ -1,8 +1,9 @@
 import React from 'react'
 import Ajax from '../componentes/Ajax'
 import Cuadrado from '../componentes/Cuadrado'
+import Retroceso from '../componentes/Retroceso'
 import useSeries from '../hooks/useSeries'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const Series = () => {
     let { carpinteria } = useParams()
@@ -15,15 +16,7 @@ const Series = () => {
 
     return (
         <>
-            <div className="row">
-                <div className="col-12 text-center mb-5">
-                    <Link to={`/productos/carpinterias/${carpinteria}/productos`} className='w-50'>
-                        <div className="service-box text-center p-5 shadow rounded d-flex align-items-center justify-content-center animacionProductos">
-                            <h4>Volver</h4>
-                        </div>
-                    </Link>
-                </div>
-            </div>
+            <Retroceso ruta={`/productos/carpinterias/${carpinteria}/productos`}/>
             <div className="row justify-content-center">
                 {buscando ? <Ajax/> : series.map(pintarCuadrados)}
             </div>

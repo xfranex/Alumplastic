@@ -1,8 +1,9 @@
 import React from 'react'
 import Ajax from '../componentes/Ajax'
 import Cuadrado from '../componentes/Cuadrado'
+import Retroceso from '../componentes/Retroceso'
 import useProductos from '../hooks/useProductos'
-import { useParams, Link } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 const Productos = () => {
     let { carpinteria } = useParams()
@@ -14,15 +15,7 @@ const Productos = () => {
 
     return (
         <>
-            <div className="row">
-                <div className="col-12 text-center mb-5">
-                    <Link to="/" className='w-50'>
-                        <div className="service-box text-center p-5 shadow rounded d-flex align-items-center justify-content-center animacionProductos">
-                            <h4>Volver</h4>
-                        </div>
-                    </Link>
-                </div>
-            </div>
+            <Retroceso ruta={`/`}/>
             <div className="row justify-content-center">
                 {buscando ? <Ajax/> : productos.map(pintarCuadrados)}
             </div>
