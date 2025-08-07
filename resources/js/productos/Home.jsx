@@ -2,17 +2,19 @@ import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import Carpinterias from './paginas/Carpinterias'
 import Productos from './paginas/Productos'
+import Series from './paginas/Series'
+import Virsualizar from './paginas/Virsualizar'
 
 const Home = () => {
     return (
         <div className="services section-padding bg-grey">
             <div className="container">
-                <div className="row justify-content-center">
-                    <Routes>
-                        <Route path='/' element={<Carpinterias/>}/>
-                        <Route path='/productos/carpinterias/:id/productos' element={<Productos/>}/>
-                    </Routes>
-                </div>
+                <Routes>
+                    <Route path='/' element={<Carpinterias/>}/>
+                    <Route path='/productos/carpinterias/:carpinteria/productos' element={<Productos/>}/>
+                    <Route path='/productos/carpinterias/:carpinteria/productos/:producto/series' element={<Series/>}/> 
+                    <Route path='/productos/carpinterias/:carpinteria/productos/:producto/series/:serie' element={<Virsualizar/>}/> 
+                </Routes>
             </div>
         </div>
     )
