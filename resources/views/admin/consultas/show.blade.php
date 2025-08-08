@@ -19,7 +19,7 @@
                 </div>
                 <div>
                     <h3 class="font-semibold text-gray-900">Mensaje:</h3>
-                    <p class="whitespace-pre-line w-full">{{ $consulta->mensaje }}</p>
+                    <p class="break-words whitespace-pre-line w-full">{{ $consulta->mensaje }}</p>
                 </div>
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-2 md:space-y-0 md:space-x-2">
                     <a href="{{ route('consultas.index') }}"
