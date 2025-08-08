@@ -15,7 +15,7 @@ const Virsualizar = () => {
         <>
             <Retroceso ruta={`/productos/carpinterias/${carpinteria}/productos/${producto}/series`}/>
             <div className="row justify-content-center">
-                {buscando ? <Ajax/> : productoSerie?.descripcion && productoSerie?.imagen ? <Detalle descripcion={productoSerie.descripcion} imagen={`/storage/${productoSerie.imagen}`}/> : "..."}
+                {buscando ? <Ajax/> : productoSerie?.descripcion && productoSerie?.imagen ? <Detalle descripcion={productoSerie.descripcion} imagen={`/storage/${productoSerie.imagen}`}/> : ""}
             </div>
         </>
     )

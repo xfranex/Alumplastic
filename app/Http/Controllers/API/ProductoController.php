@@ -10,6 +10,10 @@ class ProductoController extends Controller
     public function series($producto)
     {
         $producto = Producto::find($producto);
+        if(!$producto) {
+            return response()->json([]);
+        }
+
         $series = $producto->series()->select('series.id', 'series.nombre')->get()->makeHidden('pivot');  
         
         return response()->json($series);
@@ -18,8 +22,15 @@ class ProductoController extends Controller
     public function virsualizar($producto, $serie)
     {
         $producto = Producto::find($producto);
-        $serie = $producto->series()->where('serie_id', $serie)->first();
+        if (!$producto) {
+            return response()->json([]);
+        }
 
+        $serie = $producto->series()->where('serie_id', $serie)->first();
+        if (!$serie) {
+            return response()->json([]);
+        }
+        
         return response()->json([
             'producto_id' => $serie->pivot->producto_id,
             'serie_id' => $serie->pivot->serie_id,

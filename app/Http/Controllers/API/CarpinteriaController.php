@@ -23,6 +23,11 @@ class CarpinteriaController extends Controller
 
     public function productos($carpinteria)
     {
+        $existe = Carpinteria::where('id', $carpinteria)->exists();
+        if(!$existe) {
+            return response()->json([]);
+        }
+
         $productos = Producto::where('carpinteria_id', $carpinteria)->select('id','nombre')->get();
         
         return response()->json($productos);
