@@ -54,11 +54,11 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->rol->nombre_rol === 'administrador';
+        return $this->rol && $this->rol->nombre_rol === 'administrador';
     }
 
     public function esEmpleado()
     {
-        return $this->rol->nombre_rol === 'empleado';
+        return $this->rol && $this->rol->nombre_rol === 'empleado';
     }
 }
