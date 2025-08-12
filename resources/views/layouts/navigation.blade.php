@@ -27,6 +27,9 @@
                             {{ __('Trabajos') }}
                         </x-nav-link>
                     @endcan
+                        <x-nav-link :href="route('horarios.index')" :active="request()->routeIs('horarios.index')">
+                            {{ __('Horarios') }}
+                        </x-nav-link>
                     @can('viewAny', \App\Models\User::class)
                         <x-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
                             {{ __('Usuarios') }}
@@ -101,6 +104,11 @@
                 </x-responsive-nav-link>
             </div>
         @endcan
+            <div class="pt-2 pb-3 space-y-1">
+                <x-responsive-nav-link :href="route('horarios.index')" :active="request()->routeIs('horarios.index')">
+                    {{ __('Horarios') }}
+                </x-responsive-nav-link>
+            </div>
         @can('viewAny', \App\Models\User::class)
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('usuarios.index')" :active="request()->routeIs('usuarios.index')">
