@@ -54,6 +54,61 @@ img {
 .animacionProductos:hover {
   animation: colorProductos 8s infinite ease-in-out alternate;
 }
+@keyframes expansionLetra {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-700px);
+            transform: translateZ(-700px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+    opacity: 1;
+  }
+}
+.animacionExpansionLetra {
+	animation: expansionLetra 0.8s linear;
+}
+@keyframes bajadaLetra {
+  0% {
+    letter-spacing: -0.5em;
+    -webkit-transform: translateZ(-700px) translateY(-500px);
+            transform: translateZ(-700px) translateY(-500px);
+    opacity: 0;
+  }
+  40% {
+    opacity: 0.6;
+  }
+  100% {
+    -webkit-transform: translateZ(0) translateY(0);
+            transform: translateZ(0) translateY(0);
+    opacity: 1;
+  }
+}
+.animacionNav {
+	animation: bajadaLetra 1.5s linear;
+}
+@keyframes focoBoton {
+  0% {
+    -webkit-filter: blur(12px);
+            filter: blur(12px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-filter: blur(0px);
+            filter: blur(0px);
+    opacity: 1;
+  }
+}
+.animacionBotonContacto {
+	opacity: 0;
+	filter: blur(12px);
+	animation: focoBoton 0.7s linear 0.4s both;
+}
 span, a {
 	display: inline-block;
 	color: inherit;
@@ -599,5 +654,4 @@ h6 {
 }
 .banner-overlay {
 	padding: 150px 0px 100px;
-}
 }

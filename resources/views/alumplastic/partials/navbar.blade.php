@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg animacionNav">
   <div class="container d-flex justify-content-between align-items-center">
     <a class="navbar-brand navbar-logo flex-shrink-0 me-3" href="{{ route('welcome') }}">
       <img src="{{ asset('alumplastic/images/logo.svg') }}" alt="logo" class="logo-1">
