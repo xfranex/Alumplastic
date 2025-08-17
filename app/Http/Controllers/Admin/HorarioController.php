@@ -13,8 +13,8 @@ class HorarioController extends Controller
      */
     public function index()
     {
-        $laboral = Horario::where('tipo', 'laboral')->get();
-        $vacaciones = Horario::where('tipo', 'vacaciones')->get();
+        $laboral = Horario::where('tipo', 'laboral')->select('id', 'tipo', 'hora_mañana', 'hora_tarde', 'mensaje_laboral', 'activo')->first();
+        $vacaciones = Horario::where('tipo', 'vacaciones')->select('id', 'tipo', 'mensaje_vacaciones', 'activo')->first();
         return view('admin.horarios.index', ['laboral' => $laboral, 'vacaciones' => $vacaciones]);
     }
 
@@ -39,7 +39,8 @@ class HorarioController extends Controller
      */
     public function destroy(Horario $horario)
     {
-        Horario::update(['activo' => 0]);
+        Horario::query()->update(['activo' => 0]);
+        $horario->refresh();
         $horario->activo = 1;
         $horario->save();
         return redirect()->route('horarios.index')->with('successHorarioDelete', 'Horario activado');
