@@ -22,8 +22,8 @@
 @include('alumplastic.partials.productos')
 
 <x-galeria-trabajos/>
+<x-horario/>
 
-@include('alumplastic.partials.pasarela')
 @include('alumplastic.partials.contacto')
 @include('alumplastic.partials.footer')
 

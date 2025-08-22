@@ -542,12 +542,12 @@ h6 {
 	font-size: 47px;
 	margin-bottom: 25px;
 }
-.testimonials h5 {
-	color:#ffaf53;
-}
-.testimonials h6 {
-	color: #ffffff;
+.testimonials h4 {
+	color: #ffffff !important;
 	margin-bottom: 10px !important;
+}
+.horarioMensaje {
+	font-size: 23px;
 }
 .owl-theme .owl-dots .owl-dot.active span, .owl-theme .owl-dots .owl-dot:hover span {
 	background: #ab2f52 !important;
