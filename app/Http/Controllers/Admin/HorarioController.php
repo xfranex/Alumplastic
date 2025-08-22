@@ -23,7 +23,12 @@ class HorarioController extends Controller
      */
     public function edit(Horario $horario)
     {
-        //
+        if($horario->tipo === 'laboral') {
+            return view('admin.horarios.editLaboral', ['horario'=> $horario]);
+        }
+        if($horario->tipo === 'vacaciones') {
+            return view('admin.horarios.editVacaciones', ['horario'=> $horario]);
+        }
     }
 
     /**

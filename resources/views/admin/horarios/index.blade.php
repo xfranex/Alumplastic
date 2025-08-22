@@ -36,7 +36,7 @@
                                 </td>
                                 <td class="py-4 px-2 align-middle">
                                     <div class="flex justify-center gap-2 flex-wrap">
-                                            <a href="" class="flex-1 min-w-[120px]">
+                                            <a href="{{ route('horarios.edit', $laboral) }}" class="flex-1 min-w-[120px]">
                                                 <button
                                                     class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
                                                     Editar
@@ -68,7 +68,7 @@
                             <span>{{ $laboral->hora_mañana }} {{ $laboral->hora_tarde }}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                                <a href="" class="col-span-2">
+                                <a href="{{ route('horarios.edit', $laboral) }}" class="col-span-2">
                                     <button
                                         class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
                                         Editar
@@ -111,7 +111,7 @@
                                 </td>
                                 <td class="text-center py-3 px-4 whitespace-nowrap">
                                     <div class="flex justify-center space-x-2">
-                                            <a href="">
+                                            <a href="{{ route('horarios.edit', $vacaciones) }}">
                                                 <button
                                                     class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
                                                     Editar
@@ -138,7 +138,7 @@
                             {{ $vacaciones->mensaje_vacaciones }}
                         </div>
                         <div class="grid grid-cols-2 gap-2">
-                                <a href="" class="col-span-2">
+                                <a href="{{ route('horarios.edit', $vacaciones) }}" class="col-span-2">
                                     <button
                                         class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded w-full">
                                         Editar
