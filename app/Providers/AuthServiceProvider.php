@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Models\Carpinteria;
 use App\Models\Consulta;
+use App\Models\Horario;
 use App\Models\Producto;
 use App\Models\Serie;
 use App\Models\Trabajo;
 use App\Models\User;
 use App\Policies\CarpinteriaPolicy;
 use App\Policies\ConsultaPolicy;
+use App\Policies\HorarioPolicy;
 use App\Policies\ProductoPolicy;
 use App\Policies\SeriePolicy;
 use App\Policies\TrabajoPolicy;
@@ -29,6 +31,7 @@ class AuthServiceProvider extends ServiceProvider
         Producto::class => ProductoPolicy::class,
         Serie::class => SeriePolicy::class,
         Trabajo::class => TrabajoPolicy::class,
+        Horario::class => HorarioPolicy::class,
         User::class => UserPolicy::class,
     ];
 

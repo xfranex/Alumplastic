@@ -36,12 +36,15 @@
                                 </td>
                                 <td class="py-4 px-2 align-middle">
                                     <div class="flex justify-center gap-2 flex-wrap">
+                                        @can('update', \App\Models\Horario::class)
                                             <a href="{{ route('horarios.edit', $laboral) }}" class="flex-1 min-w-[120px]">
                                                 <button
                                                     class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
                                                     Editar
                                                 </button>
                                             </a>
+                                        @endcan
+                                        @can('delete', \App\Models\Horario::class)
                                             <form action="{{ route('horarios.destroy', $laboral) }}" method="POST"
                                                 class="flex-1 min-w-[120px]">
                                                 @csrf
@@ -51,6 +54,14 @@
                                                     {{ $laboral->activo ? "Activado" : "Desactivado"}}
                                                 </button>
                                             </form>
+                                        @else
+                                            <div class="flex-1">
+                                                <button type="button" disabled 
+                                                    class="min-w-[100px] {{ $laboral->activo ? 'bg-green-600' : 'bg-gray-600' }} text-white font-semibold py-2 rounded">
+                                                        {{ $laboral->activo ? "Activado" : "Desactivado"}}
+                                                </button>
+                                            </div>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -68,12 +79,15 @@
                             <span>{{ $laboral->hora_mañana }} {{ $laboral->hora_tarde }}</span>
                         </div>
                         <div class="grid grid-cols-2 gap-2">
+                            @can('update', \App\Models\Horario::class)
                                 <a href="{{ route('horarios.edit', $laboral) }}" class="col-span-2">
                                     <button
                                         class="w-full bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 rounded">
                                         Editar
                                     </button>
                                 </a>
+                            @endcan
+                            @can('delete', \App\Models\Horario::class)
                                 <form action="{{ route('horarios.destroy', $laboral) }}" method="POST"
                                     class="col-span-2">
                                     @csrf
@@ -83,6 +97,14 @@
                                         {{ $laboral->activo ? "Activado" : "Desactivado"}}
                                     </button>
                                 </form>
+                            @else
+                                <div class="col-span-2">
+                                    <button type="button" disabled
+                                        class="w-full {{ $laboral->activo ? 'bg-green-600' : 'bg-gray-600' }} text-white font-semibold py-2 rounded">
+                                            {{ $laboral->activo ? "Activado" : "Desactivado"}}
+                                    </button>
+                                </div>
+                            @endcan
                         </div>
                     </div>
             </div>
@@ -111,12 +133,15 @@
                                 </td>
                                 <td class="text-center py-3 px-4 whitespace-nowrap">
                                     <div class="flex justify-center space-x-2">
+                                        @can('update', \App\Models\Horario::class)
                                             <a href="{{ route('horarios.edit', $vacaciones) }}">
                                                 <button
                                                     class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
                                                     Editar
                                                 </button>
                                             </a>
+                                        @endcan
+                                        @can('delete', \App\Models\Horario::class)
                                             <form action="{{ route('horarios.destroy', $vacaciones) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
@@ -125,6 +150,14 @@
                                                     {{ $vacaciones->activo ? "Activado" : "Desactivado"}}
                                                 </button>
                                             </form>
+                                        @else
+                                            <div class="flex-1">
+                                                <button type="button" disabled 
+                                                    class="min-w-[100px] {{ $vacaciones->activo ? 'bg-green-600' : 'bg-gray-600' }} text-white font-semibold py-2 rounded">
+                                                        {{ $vacaciones->activo ? "Activado" : "Desactivado"}}
+                                                </button>
+                                            </div>
+                                        @endcan
                                     </div>
                                 </td>
                             </tr>
@@ -138,12 +171,15 @@
                             {{ $vacaciones->mensaje_vacaciones }}
                         </div>
                         <div class="grid grid-cols-2 gap-2">
+                            @can('update', \App\Models\Horario::class)
                                 <a href="{{ route('horarios.edit', $vacaciones) }}" class="col-span-2">
                                     <button
                                         class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded w-full">
                                         Editar
                                     </button>
                                 </a>
+                            @endcan
+                            @can('delete', \App\Models\Horario::class)
                                 <form action="{{ route('horarios.destroy', $vacaciones) }}" method="POST" class="col-span-2">
                                     @csrf
                                     @method('DELETE')
@@ -152,6 +188,14 @@
                                         {{ $vacaciones->activo ? "Activado" : "Desactivado"}}
                                     </button>
                                 </form>
+                            @else
+                                <div class="col-span-2">
+                                    <button type="button" disabled
+                                        class="w-full {{ $vacaciones->activo ? 'bg-green-600' : 'bg-gray-600' }} text-white font-semibold py-2 rounded">
+                                            {{ $vacaciones->activo ? "Activado" : "Desactivado"}}
+                                    </button>
+                                </div>
+                            @endcan
                         </div>
                     </div>
             </div>

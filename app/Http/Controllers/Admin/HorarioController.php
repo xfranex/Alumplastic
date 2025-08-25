@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Horario;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
 class HorarioController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
+        $this->authorize('viewAny', Horario::class);
         $laboral = Horario::where('tipo', 'laboral')->select('id', 'tipo', 'hora_mañana', 'hora_tarde', 'mensaje_laboral', 'activo')->first();
         $vacaciones = Horario::where('tipo', 'vacaciones')->select('id', 'tipo', 'mensaje_vacaciones', 'activo')->first();
         return view('admin.horarios.index', ['laboral' => $laboral, 'vacaciones' => $vacaciones]);
@@ -23,6 +26,7 @@ class HorarioController extends Controller
      */
     public function edit(Horario $horario)
     {
+        $this->authorize('update', Horario::class);
         if($horario->tipo === 'laboral') {
             return view('admin.horarios.editLaboral', ['horario'=> $horario]);
         }
@@ -37,6 +41,7 @@ class HorarioController extends Controller
      */
     public function update(Request $request, Horario $horario)
     {
+        $this->authorize('update', Horario::class);
         if($horario->tipo === 'laboral') {
             
         }
@@ -68,6 +73,7 @@ class HorarioController extends Controller
      */
     public function destroy(Horario $horario)
     {
+        $this->authorize('delete', Horario::class);
         Horario::query()->update(['activo' => 0]);
         $horario->refresh();
         $horario->activo = 1;
