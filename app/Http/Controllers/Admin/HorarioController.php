@@ -27,7 +27,8 @@ class HorarioController extends Controller
             return view('admin.horarios.editLaboral', ['horario'=> $horario]);
         }
         if($horario->tipo === 'vacaciones') {
-            return view('admin.horarios.editVacaciones', ['horario'=> $horario]);
+            $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+            return view('admin.horarios.editVacaciones', ['horario'=> $horario, 'meses' => $meses]);
         }
     }
 
@@ -36,7 +37,30 @@ class HorarioController extends Controller
      */
     public function update(Request $request, Horario $horario)
     {
-        //
+        if($horario->tipo === 'laboral') {
+            
+        }
+        
+        if($horario->tipo === 'vacaciones') {
+            $request->validate([
+                'dia_inicio' => 'required|integer|between:1,31',
+                'mes_inicio' => 'required',
+                'dia_fin' => 'required|integer|between:1,31',
+                'mes_fin' => 'required',
+            ],[
+                'dia_inicio.required' => 'El día de inicio es obligatorio',
+                'dia_inicio.between' => 'El día de inicio tiene que estar entre 1 y 31',
+                'mes_inicio.required' => 'El mes de inicio es obligatorio',
+                'dia_fin.required' => 'El día de fin es obligatorio',
+                'dia_fin.between'=> 'El día de fin tiene que estar entre 1 y 31',
+                'mes_fin.required'=> 'El mes de fin es obligatorio',
+            ]);
+            
+            $mensaje = "Estamos de vacaciones del " . $request->dia_inicio . ' de ' . $request->mes_inicio . ' al ' . $request->dia_fin . ' de ' . $request->mes_fin;
+            $horario->mensaje_vacaciones = $mensaje;
+            $horario->save();
+            return redirect()->route('horarios.index')->with('successHorarioUpdate','Vacaciones editadas correctamente');
+        }
     }
 
     /**
