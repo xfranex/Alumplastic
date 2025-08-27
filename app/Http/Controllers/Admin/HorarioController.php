@@ -28,8 +28,18 @@ class HorarioController extends Controller
     {
         $this->authorize('update', Horario::class);
         if($horario->tipo === 'laboral') {
-            return view('admin.horarios.editLaboral', ['horario'=> $horario]);
+            $semana = [
+                ['clave' => 'L', 'nombre' => 'Lunes'],
+                ['clave' => 'M', 'nombre' => 'Martes'],
+                ['clave' => 'X', 'nombre' => 'Miércoles'],
+                ['clave' => 'J', 'nombre' => 'Jueves'],
+                ['clave' => 'V', 'nombre' => 'Viernes'],
+                ['clave' => 'S', 'nombre' => 'Sábados'],
+                ['clave' => 'D', 'nombre' => 'Domingos'],
+            ];
+            return view('admin.horarios.editLaboral', ['horario'=> $horario, 'semana' => $semana]);
         }
+        
         if($horario->tipo === 'vacaciones') {
             $meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
             return view('admin.horarios.editVacaciones', ['horario'=> $horario, 'meses' => $meses]);
@@ -43,7 +53,29 @@ class HorarioController extends Controller
     {
         $this->authorize('update', Horario::class);
         if($horario->tipo === 'laboral') {
+            $request->validate([
+                'dias' => 'required',
+                'mañana_inicio' => 'required',
+                'mañana_fin' => 'required',
+                'tarde_inicio' => 'required',
+                'tarde_fin' => 'required',
+            ],[
+                'dias.required' => 'Debes seleccionar al menos un día',
+                'mañana_inicio.required' => 'Debes establecer la hora de inicio de la mañana',
+                'mañana_fin.required' => 'Debes establecer la hora de finalización de la mañana',
+                'tarde_inicio.required' => 'Debes establecer la hora de inicio de la tarde',
+                'tarde_fin.required' => 'Debes establecer la hora de finalización de la tarde',
+            ]);
+
+            $hora_mañana = $request->mañana_inicio . '-' . $request->mañana_fin;
+            $hora_tarde = $request->tarde_inicio . '-' . $request->tarde_fin;
+            $mensajeL = implode(' ', $request->dias);
             
+            $horario->hora_mañana = $hora_mañana;
+            $horario->hora_tarde = $hora_tarde;
+            $horario->mensaje_laboral = $mensajeL;
+            $horario->save();
+            return redirect()->route('horarios.index')->with('successHorarioUpdate', 'Laboral editado correctamente');
         }
         
         if($horario->tipo === 'vacaciones') {
