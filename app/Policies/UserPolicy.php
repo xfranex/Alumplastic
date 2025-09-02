@@ -21,4 +21,12 @@ class UserPolicy
     {
         return $user->isAdmin();
     }
+
+    /**
+     * Determine whether the user can delete the model.
+     */
+    public function delete(User $user): bool //destroy
+    {
+        return $user->isAdmin();
+    }
 }

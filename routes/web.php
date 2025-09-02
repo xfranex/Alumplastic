@@ -36,7 +36,7 @@ Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() 
     Route::resource('series', SerieController::class)->except(['show'])->parameters(['series' => 'serie']);
     Route::resource('trabajos', TrabajoController::class)->except(['show']);
     Route::resource('horarios', HorarioController::class)->except(['create', 'store', 'show']);
-    Route::resource('usuarios', UserController::class)->except(['create','store','show','destroy'])->parameters(['usuarios' => 'user']);
+    Route::resource('usuarios', UserController::class)->except(['create','store','show'])->parameters(['usuarios' => 'user']);
 });
 
 require __DIR__.'/auth.php';

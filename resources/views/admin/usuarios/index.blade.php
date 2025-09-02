@@ -1,10 +1,16 @@
 <x-app-layout>
     <div class="px-4 py-2"></div>
 
-    @if(session('successUsuarioUpdate'))
+    @if (session('successUsuarioUpdate'))
         <div id="success-message"
             class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
             <p class="text-sm font-semibold">{{ session('successUsuarioUpdate') }}</p>
+        </div>
+    @endif
+    @if (session('successUsuarioDelete'))
+        <div id="success-message"
+            class="max-w-md mx-auto mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded shadow-md text-center">
+            <p class="text-sm font-semibold">{{ session('successUsuarioDelete') }}</p>
         </div>
     @endif
 
@@ -29,16 +35,30 @@
                                     {{ $usuario->email }}
                                 </td>
                                 <td class="text-center py-3 px-4 whitespace-nowrap truncate max-w-[20ch] break-words">
-                                    {{ $usuario->rol->nombre_rol }}
+                                    @if ($usuario->rol_id === null)
+                                        <span class="text-red-500 font-bold">Desactivado</span>
+                                    @else
+                                        {{ $usuario->rol->nombre_rol }}
+                                    @endif
                                 </td>
                                 <td class="text-center py-3 px-4 whitespace-nowrap">
-                                    <div class="flex justify-center space-x-2">
+                                    <div class="flex flex-wrap justify-center gap-2">
                                         <a href="{{ route('usuarios.edit', $usuario) }}">
                                             <button
-                                                class="min-w-[100px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
+                                                class="w-full sm:w-[200px] h-[40px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-1 px-3 rounded whitespace-nowrap">
                                                 Cambiar contraseña
                                             </button>
                                         </a>
+                                        @if ($usuario->id === 2)
+                                            <form action="{{ route('usuarios.destroy', $usuario) }}" method="POST" class="w-full sm:w-[200px]">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit"
+                                                    class="w-full h-[40px] {{ $usuario->rol_id ? 'bg-green-600' : 'bg-gray-600' }} text-white font-semibold py-2 rounded">
+                                                    {{ $usuario->rol_id ? 'Activado' : 'Desactivado' }}
+                                                </button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </td>
                             </tr>
@@ -54,17 +74,31 @@
                             <span class="font-semibold">Email: </span>
                             <span class="break-words">{{ $usuario->email }}</span>
                         </div>
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <span class="font-semibold">Rol: </span>
-                            <span class="break-words">{{ $usuario->rol->nombre_rol }}</span>
+                            @if ($usuario->rol_id === null)
+                                <span class="break-words text-red-500 font-bold">Desactivado</span>
+                            @else
+                                <span class="break-words">{{ $usuario->rol->nombre_rol }}</span>
+                            @endif
                         </div>
-                        <div class="flex flex-col space-y-2 items-center">
+                        <div class="flex flex-col items-center space-y-2">
                             <a href="{{ route('usuarios.edit', $usuario) }}">
                                 <button
-                                    class="bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded min-w-[120px]">
+                                    class="w-[200px] h-[40px] bg-amber-400 hover:bg-amber-600 text-white font-semibold py-2 px-4 rounded">
                                     Cambiar contraseña
                                 </button>
                             </a>
+                            @if ($usuario->id === 2)
+                                <form action="{{ route('usuarios.destroy', $usuario) }}" method="POST" class="w-[200px]">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit"
+                                        class="h-[40px] {{ $usuario->rol_id ? 'bg-green-600' : 'bg-gray-600' }} text-white font-semibold py-2 rounded w-[200px]">
+                                        {{ $usuario->rol_id ? 'Activado' : 'Desactivado' }}
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     </div>
                 @endforeach

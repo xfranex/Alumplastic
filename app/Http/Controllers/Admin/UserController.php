@@ -46,4 +46,23 @@ class UserController extends Controller
 
         return redirect()->route('usuarios.index')->with('successUsuarioUpdate', 'Contraseña cambiada');
     }
+
+    /**
+     * Remove the specified resource from storage.
+    */
+    public function destroy(User $user)
+    {
+        $this->authorize('delete', User::class);
+        if($user->id === 2 && $user->rol_id === null) {
+            $user->rol_id = 2;
+            $user->save();
+            return redirect()->route('usuarios.index')->with('successUsuarioDelete','Usuario activado');
+        }
+        
+        if($user->id === 2 && $user->rol_id === 2) {
+            $user->rol_id = null;
+            $user->save();
+            return redirect()->route('usuarios.index')->with('successUsuarioDelete','Usuario desactivado');
+        }
+    }
 }
