@@ -21,13 +21,13 @@ Route::get('/productos/{any}', function () {
 
 Route::post('consultas', [ConsultaController::class, 'store'])->name('consultas.store');
 
-Route::prefix('/dashboard')->middleware(['auth', 'verified'])->group(function() {
+Route::prefix('/dashboard')->middleware(['auth'])->group(function() {
     Route::get('/', function () {
-        if (Auth::check() && (Auth::user()->isAdmin() || Auth::user()->esEmpleado())) {
-            return redirect()->route('consultas.index');
-        } else {
-            return redirect()->route('welcome');
+        if(Auth::user()->rol_id === null) {
+            Auth::logout();
+            return view('auth.login');
         }
+        return redirect()->route('consultas.index');
     })->name('dashboard');
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
     Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);

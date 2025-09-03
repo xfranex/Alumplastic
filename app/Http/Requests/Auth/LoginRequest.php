@@ -45,7 +45,14 @@ class LoginRequest extends FormRequest
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'password' => 'El email o la contraseña no son correctos.',
+                'password' => 'El email o la contraseña no son correctos',
+            ]);
+        }
+
+        if (is_null(Auth::user()->rol_id)) {
+            Auth::logout();
+            throw ValidationException::withMessages([
+                'email' => 'Usuario desactivado',
             ]);
         }
 
