@@ -112,7 +112,8 @@ class ProductoController extends Controller
     {
         $this->authorize('update', Producto::class);
         $carpinteria = $producto->carpinteria;
-        return view('admin.productos.edit', ['producto' => $producto, 'carpinteria' => $carpinteria]);
+        $carpinterias = Carpinteria::all();
+        return view('admin.productos.edit', ['producto' => $producto, 'carpinteria' => $carpinteria, 'carpinterias' => $carpinterias]);
     }
 
     /**
@@ -123,13 +124,17 @@ class ProductoController extends Controller
         $this->authorize('update', Producto::class);
         $carpinteria = $producto->carpinteria;
         $request->validate([
+            'carpinteria_id' => 'required|exists:carpinterias,id',
             'nombre' => 'required|max:255|unique:productos,nombre,' . $producto->id . ',id,carpinteria_id,' . $producto->carpinteria_id,
         ], [
+            'carpinteria_id.required' => 'La carpintería es obligatoria',
+            'carpinteria_id.exists' => 'La carpintería seleccionada no es válida',
             'nombre.required' => 'El nombre del producto es obligatorio',
             'nombre.max' => 'El nombre es demasiado largo',
             'nombre.unique' => 'El nombre del producto ya existe en esta carpintería',
         ]);
 
+        $producto->carpinteria_id = $request->carpinteria_id;
         $producto->nombre =  strtoupper($request->nombre);
         $producto->save();
 

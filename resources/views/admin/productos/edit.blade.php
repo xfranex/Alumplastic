@@ -10,6 +10,21 @@
                     @csrf
                     @method('PUT')
                     <div>
+                        <label for="carpinteria_id" class="block text-gray-700 font-semibold mb-2">Carpintería</label>
+                        <select name="carpinteria_id" id="carpinteria_id" 
+                            class="w-full border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Seleccione una carpintería</option>
+                            @foreach ($carpinterias as $carpinteriaU)
+                                <option value="{{ $carpinteriaU->id }}" {{ old('carpinteria_id', $carpinteria->id ?? '') == $carpinteriaU->id ? 'selected' : '' }}>
+                                    {{ $carpinteriaU->nombre }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('carpinteria_id')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
+                    </div>
+                    <div>
                         <label for="nombre" class="block text-gray-700 font-semibold mb-2">Nombre del Producto</label>
                         <input type="text" name="nombre" id="nombre"
                             value="{{ old('nombre', $producto->nombre) }}"
