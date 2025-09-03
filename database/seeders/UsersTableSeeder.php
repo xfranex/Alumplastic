@@ -17,15 +17,13 @@ class UsersTableSeeder extends Seeder
         $rolEmpleado = Rol::where('nombre_rol', 'empleado')->first();
 
         User::truncate();
-        if(User::count() == 0) {
-            // Usuario Administrador
-            User::create([
+        // Usuario Administrador
+        User::create([
             'name' => 'Paco',
             'email' => env('ADMIN_EMAIL'),
             'password' => bcrypt(env('ADMIN_PASSWORD')),
             'rol_id' => $rolAdmin->id,
-            ]);
-        }
+        ]);
 
         // Usuario Empleado
         User::create([
