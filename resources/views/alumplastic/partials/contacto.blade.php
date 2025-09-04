@@ -73,7 +73,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-12 text-center">
-                                    <button type="submit" class="bttn">Enviar</button>
+                                    <button type="submit" class="bttn" id="bttnC">Enviar</button>
                                     @if (session('successContacto'))
                                         <div id="success-message"
                                             class="mt-4 !text-green-600 text-center font-bold mensajeContacto">
@@ -91,6 +91,13 @@
                                         </script>
                                     @endif
                                 </div>
+                                <script>
+                                    document.getElementById('contact-form').addEventListener('submit', function() {
+                                        const btn = document.getElementById('bttnC');
+                                        btn.disabled = true;
+                                        btn.textContent = 'Enviando';
+                                    });
+                                </script>
                             </div>
                         </div>
                     </form>
