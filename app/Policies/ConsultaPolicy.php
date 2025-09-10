@@ -11,7 +11,7 @@ class ConsultaPolicy
      */
     public function viewAny(User $user): bool //index
     {
-        return $user->isAdmin() || $user->esEmpleado();
+        return $user->isAdmin();
     }
 
     /**
@@ -19,7 +19,7 @@ class ConsultaPolicy
      */
     public function view(User $user): bool //show
     {
-        return $user->isAdmin() || $user->esEmpleado();
+        return $user->isAdmin();
     }
 
     /**

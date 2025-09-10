@@ -27,7 +27,11 @@ Route::prefix('/dashboard')->middleware(['auth'])->group(function() {
             Auth::logout();
             return view('auth.login');
         }
-        return redirect()->route('consultas.index');
+        if(Auth::user()->isAdmin()) {
+            return redirect()->route('consultas.index');
+        } else {
+            return redirect()->route('carpinterias.index');
+        }
     })->name('dashboard');
     Route::resource('consultas', ConsultaController::class)->except(['store', 'create','edit','update']);
     Route::resource('carpinterias', CarpinteriaController::class)->except(['show']);
