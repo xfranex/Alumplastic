@@ -15,7 +15,7 @@ class TokenApi
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if ($request->header('token-alumplastic') !== env('TOKEN_API')) {
+        if ($request->header('token-alumplastic') !== config('token_api.token')) {
             abort(404);
         }
         
