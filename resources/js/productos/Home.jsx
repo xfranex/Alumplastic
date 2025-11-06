@@ -7,7 +7,7 @@ import Virsualizar from './paginas/Virsualizar'
 
 const Home = () => {
     return (
-        <div className="services section-padding bg-grey">
+        <div className="services section-padding">
             <div className="container">
                 <Routes>
                     <Route path='/' element={<Carpinterias/>}/>
