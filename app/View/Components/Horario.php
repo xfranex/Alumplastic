@@ -18,7 +18,7 @@ class Horario extends Component
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Componente que devuelve la vista de la sección de horarios con toda la información necesaria de la bbdd
      */
     public function render(): View|Closure|string
     {
