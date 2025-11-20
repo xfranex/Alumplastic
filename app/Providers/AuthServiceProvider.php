@@ -25,6 +25,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array<class-string, class-string>
      */
+    //registro de las políticas que definen qué acciones se pueden o no realizar
     protected $policies = [
         Consulta::class => ConsultaPolicy::class,
         Carpinteria::class => CarpinteriaPolicy::class,

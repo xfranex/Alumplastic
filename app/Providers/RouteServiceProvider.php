@@ -17,6 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    //los usuarios son redirigidos aquí después de iniciar sesión
     public const HOME = '/dashboard';
 
     /**
@@ -24,15 +25,17 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        //límite de solicitudes para la API 60 por minuto por usuario o IP
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
 
         $this->routes(function () {
+            //agrupa las rutas api con prefijo /api, archivo de rutas y su middleware
             Route::middleware('api')
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
-
+            //rutas web con middleware 'web'
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
         });
