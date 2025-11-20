@@ -7,7 +7,7 @@ use App\Models\User;
 class HorarioPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * La lista de horarios puede verla el administrador y el empleado
      */
     public function viewAny(User $user): bool //index
     {
@@ -15,7 +15,7 @@ class HorarioPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * El proceso de actualización de un horario solo puede hacerlo el administrador
      */
     public function update(User $user): bool //edit update
     {
@@ -23,7 +23,7 @@ class HorarioPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * El proceso de activación o desactivación de un horario solo puede hacerlo el administrador
      */
     public function delete(User $user): bool //destroy
     {

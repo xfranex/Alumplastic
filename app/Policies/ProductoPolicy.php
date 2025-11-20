@@ -7,7 +7,7 @@ use App\Models\User;
 class ProductoPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * La lista de productos puede verla el administrador y el empleado
      */
     public function viewAny(User $user): bool //index
     {
@@ -15,7 +15,7 @@ class ProductoPolicy
     }
     
     /**
-     * Determine whether the user can view the model.
+     * El detalle de un producto puede verlo el administrador y el empleado
      */
     public function view(User $user): bool //show
     {
@@ -23,7 +23,7 @@ class ProductoPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * El proceso de creación de un producto solo puede hacerlo el administrador
      */
     public function create(User $user): bool //create store
     {
@@ -31,7 +31,7 @@ class ProductoPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * El proceso de actualización de un producto solo puede hacerlo el administrador
      */
     public function update(User $user): bool //edit update
     {
@@ -39,7 +39,7 @@ class ProductoPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * El proceso de eliminación de un producto solo puede hacerlo el administrador
      */
     public function delete(User $user): bool //destroy
     {

@@ -7,7 +7,7 @@ use App\Models\User;
 class UserPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * La lista de usuarios puede verla solo el administrador
      */
     public function viewAny(User $user): bool //index
     {
@@ -15,7 +15,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * El cambio de contraseña solo puede hacerlo el administrador
      */
     public function update(User $user): bool //edit update
     {
@@ -23,7 +23,7 @@ class UserPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * La activación o desactivación del usuario empleado solo puede hacerlo el administrador
      */
     public function delete(User $user): bool //destroy
     {

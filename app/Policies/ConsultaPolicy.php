@@ -7,7 +7,7 @@ use App\Models\User;
 class ConsultaPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * La lista de consultas puede verla solo el administrador
      */
     public function viewAny(User $user): bool //index
     {
@@ -15,7 +15,7 @@ class ConsultaPolicy
     }
 
     /**
-     * Determine whether the user can view the model.
+     * El detalle de una consulta puede verlo solo el administrador
      */
     public function view(User $user): bool //show
     {
@@ -23,7 +23,7 @@ class ConsultaPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * El proceso de eliminación de una consulta solo puede hacerlo el administrador
      */
     public function delete(User $user): bool //destroy
     {

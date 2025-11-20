@@ -7,7 +7,7 @@ use App\Models\User;
 class CarpinteriaPolicy
 {
     /**
-     * Determine whether the user can view any models.
+     * La lista de carpinterías pueden verla el administrador y empleado
      */
     public function viewAny(User $user): bool //index
     {
@@ -15,7 +15,7 @@ class CarpinteriaPolicy
     }
 
     /**
-     * Determine whether the user can create models.
+     * El proceso de creación de una carpintería solo puede hacerlo el administrador
      */
     public function create(User $user): bool //create store
     {
@@ -23,7 +23,7 @@ class CarpinteriaPolicy
     }
 
     /**
-     * Determine whether the user can update the model.
+     * El proceso de actualización de una carpintería solo puede hacerlo un administrador
      */
     public function update(User $user): bool //edit update
     {
@@ -31,7 +31,7 @@ class CarpinteriaPolicy
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * El proceso de eliminación de una carpintería solo puede hacerlo un administrador
      */
     public function delete(User $user): bool //destroy
     {
