@@ -15,6 +15,7 @@ class TokenApi
      */
     public function handle(Request $request, Closure $next): Response
     {
+        //obtiene el valor del header llamado token-alumplastic y si es diferente al token que tengo en .env devuelve un error "404 Not Found"
         if ($request->header('token-alumplastic') !== config('token_api.token')) {
             abort(404);
         }
