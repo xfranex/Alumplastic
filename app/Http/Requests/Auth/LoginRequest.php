@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 class LoginRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Siempre devuelve true porque cualquier persona puede intentar iniciar sesión
      */
     public function authorize(): bool
     {
@@ -26,6 +26,7 @@ class LoginRequest extends FormRequest
      */
     public function rules(): array
     {
+        //las reglas de validación del login
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
@@ -37,18 +38,20 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    //autentica al usuario con los datos del formulario
     public function authenticate(): void
     {
-        $this->ensureIsNotRateLimited();
+        $this->ensureIsNotRateLimited(); //verifica que el usuario no haya excedido el límite de intentos
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) { //intenta iniciar sesión con email y contraseña y si falla entonces...
+            RateLimiter::hit($this->throttleKey()); //incrementa el contador de intentos
 
-            throw ValidationException::withMessages([
+            throw ValidationException::withMessages([ //lanza ValidationException
                 'password' => 'El email o la contraseña no son correctos',
             ]);
         }
 
+        //verifica si el usuario está desactivado y si lo está entonces hace logout y lanza el error
         if (is_null(Auth::user()->rol_id)) {
             Auth::logout();
             throw ValidationException::withMessages([
@@ -56,7 +59,7 @@ class LoginRequest extends FormRequest
             ]);
         }
 
-        RateLimiter::clear($this->throttleKey());
+        RateLimiter::clear($this->throttleKey()); //limpia el contador de intentos
     }
 
     /**
@@ -66,24 +69,20 @@ class LoginRequest extends FormRequest
      */
     public function ensureIsNotRateLimited(): void
     {
-        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
+        //Protege contra demasiados intentos de inicio de sesión por ejemplo contra fuerza bruta
+        if (! RateLimiter::tooManyAttempts($this->throttleKey(), 4)) { 
             return;
         }
 
         event(new Lockout($this));
-
-        $seconds = RateLimiter::availableIn($this->throttleKey());
-
+        //si falla más de 4 veces entonces sale este mensaje
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => 'Has intentado iniciar sesión demasiadas veces',
         ]);
     }
 
     /**
-     * Get the rate limiting throttle key for the request.
+     * Genera una clave única para el sistema de intentos de inicio de sesión para limitar, sabe diferenciar intentos distintos de sesión por la IP
      */
     public function throttleKey(): string
     {
