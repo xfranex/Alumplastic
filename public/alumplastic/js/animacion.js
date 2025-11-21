@@ -23,7 +23,6 @@ $(window).on("load", function () {
         $('.navbar-logo img').attr('src', window.logoSrc);
     }
 
-    /* smooth scroll */
     $.scrollIt({
         easing: 'swing',
         scrollTime: 900,
@@ -32,7 +31,6 @@ $(window).on("load", function () {
         topOffset: -63
     });
 
-    /* isotope */
     var $gallery = $('.gallery').isotope({});
     $('.gallery').isotope({
         itemSelector: '.item-img',
@@ -47,7 +45,6 @@ $(window).on("load", function () {
         'overlayShow': false
     });
 
-    /* filter items on button click */
     $('.filtering').on('click', 'button', function () {
         var filterValue = $(this).attr('data-filter');
         $gallery.isotope({ filter: filterValue });
@@ -66,12 +63,10 @@ $(function () {
         }
     });
 
-    /* sections background color from data background */
     $("[data-background-color]").each(function () {
         $(this).css("background-color", $(this).attr("data-background-color"));
     });
 
-    /* Owl Carousel testimonial */
     $('.testimonials .owl-carousel').owlCarousel({
         loop: true,
         autoplay: true,
