@@ -12,7 +12,7 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/owl.carousel.min.css') }}"/>
 <link rel="stylesheet" type="text/css" href="{{ asset('alumplastic/css/owl.theme.default.min.css') }}"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-@vite(['resources/js/productos/app.jsx'])
+@vite(['resources/js/productos/app.jsx']) {{-- indica que tiene que cargar el archivo para que vite lo compile de jsx a js que es compatible con el navegador --}}
 </head>
 
 <body>

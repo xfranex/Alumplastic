@@ -9,7 +9,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
 
         <link href="{{ asset('vendor/cropperjs/cropper.min.css') }}" rel="stylesheet">
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
+        @vite(['resources/css/app.css', 'resources/js/app.js']) {{-- indica que tiene que cargar los archivos para que vite los compile y los ofrezca para hacer que funcione --}}
         <script src="{{ asset('vendor/cropperjs/cropper.min.js') }}"></script>
     </head>
     <body class="font-sans antialiased">

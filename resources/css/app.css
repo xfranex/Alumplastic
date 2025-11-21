@@ -1,4 +1,4 @@
-@import './fuentesFigtree.css';
+@import './fuentesFigtree.css'; /*fuentes importadas*/
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
