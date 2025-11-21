@@ -9,7 +9,7 @@ use App\Models\Rol;
 class UsersTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Datos inciales de usuarios
      */
     public function run(): void
     {

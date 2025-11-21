@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class CarpinteriasTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Datos iniciales de carpinterías
      */
     public function run(): void
     {
@@ -22,6 +22,7 @@ class CarpinteriasTableSeeder extends Seeder
         $this->command->info('Carpinterías creadas!');
     }
 
+    //crearemos dos carpinterías
     private static $carpinterias = array(
         array('nombre' => 'PVC'),
         array('nombre' => 'ALUMINIO'),

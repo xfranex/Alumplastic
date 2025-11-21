@@ -8,7 +8,7 @@ use Illuminate\Database\Seeder;
 class HorariosTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Datos iniciales de horarios
      */
     public function run(): void
     {
@@ -23,6 +23,7 @@ class HorariosTableSeeder extends Seeder
         $this->command->info('Horarios creados!');
     }
 
+    //crearemos dos tipos de horarios
     private static $horarios = array(
         array('tipo' => 'laboral', 'activo' => 1),
         array('tipo' => 'vacaciones', 'activo' => 0),

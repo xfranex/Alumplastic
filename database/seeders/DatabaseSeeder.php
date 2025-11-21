@@ -13,16 +13,16 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Model::unguard();
-        Schema::disableForeignKeyConstraints();
+        Model::unguard(); //permite insertar datos masivamente sin restricciones de asignación masiva
+        Schema::disableForeignKeyConstraints(); //deshabilita claves foráneas temporalmente
 
-        $this->call(RolesTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
-        $this->call(CarpinteriasTableSeeder::class);
-        $this->call(HorariosTableSeeder::class);
-        $this->command->info('Tablas inicializadas con datos!');
+        $this->call(RolesTableSeeder::class); //ejecuta el seeder encargado de poblar la tabla roles
+        $this->call(UsersTableSeeder::class); //ejecuta el seeder encargado de poblar la tabla users
+        $this->call(CarpinteriasTableSeeder::class); //ejecuta el seeder encargado de poblar la tabla carpinterías
+        $this->call(HorariosTableSeeder::class); //ejecuta el seeder encargado de poblar la tabla horarios
+        $this->command->info('Tablas inicializadas con datos!'); //mensaje que sale cuando se completan los seeders
 
-        Model::reguard();
-        Schema::enableForeignKeyConstraints();
+        Model::reguard(); //vuelve a activar la protección de asignación masiva
+        Schema::enableForeignKeyConstraints(); //reactiva las restricciones de claves foráneas
     }
 }

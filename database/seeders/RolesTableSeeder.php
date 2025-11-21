@@ -8,7 +8,7 @@ use App\Models\Rol;
 class RolesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
+     * Datos iniciales de roles
      */
     public function run(): void
     {
@@ -22,6 +22,7 @@ class RolesTableSeeder extends Seeder
         $this->command->info('Roles creados!');
     }
     
+    //crearemos dos tipos de roles
     private static $roles = array(
         array('rol' => 'administrador'),
         array('rol' => 'empleado')
