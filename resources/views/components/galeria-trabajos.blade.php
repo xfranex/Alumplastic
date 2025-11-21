@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12 section-title text-center">
                 <h3>Nuestros Trabajos</h3>
-                <p>Te compartimos un poco de lo que hacemos</p>
+                <p id="negro">Te compartimos un poco de lo que hacemos</p>
                 <span class="section-title-line"></span>
             </div>
             <div class="filtering text-center mb-30">

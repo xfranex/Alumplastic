@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-12 section-title text-center">
                 <h3>Contacto</h3>
-                <p>Rellene todos los datos y nos pondremos en contacto lo antes posible con usted</p>
+                <p id="negro">Rellene todos los datos y nos pondremos en contacto lo antes posible con usted</p>
                 <span class="section-title-line"></span>
             </div>
             <div class="col-lg-5 col-md-5 pr-4">
