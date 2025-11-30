@@ -8,7 +8,6 @@
       <div class="col-md-6 mb-50">
         <div class="section-info">
           <div class="sub-title-paragraph">
-            <h4>You can conquer the world.</h4>
             <span id="negro">Empresa familiar con más de 55 años en el sector de la fabricación de puertas, ventanas y cerramientos incorporando
               nuevos sistemas en sus fabricaciones acorde a los nuevos tiempos.
             </span>
