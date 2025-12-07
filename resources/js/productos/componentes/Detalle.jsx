@@ -7,7 +7,7 @@ const Detalle = (props) => {
                 <img src={props.imagen} className="img-fluid w-100"/>
             </div>
             <div className="text-center">
-                <p id="negro" className="fs-5 fw-medium">{props.descripcion}</p>
+                <p id="negro" className="fs-5 fw-medium" style={{ whiteSpace: "pre-line" }}>{props.descripcion}</p>
             </div>
         </div>
     )
