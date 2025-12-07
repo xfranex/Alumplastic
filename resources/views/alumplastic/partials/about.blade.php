@@ -15,7 +15,7 @@
         </div>
       </div>
       <div class="col-md-6 mb-50">
-        <div class="section-img"> <img src="{{ asset('alumplastic/images/about.jpg') }}" alt="" class="img-responsive"/> </div>
+        <div class="section-img"> <img src="{{ asset('alumplastic/images/about.webp') }}" alt="" class="img-responsive"/> </div>
       </div>
     </div>
   </div>
