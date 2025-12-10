@@ -12,14 +12,14 @@
                         <div class="icon"> <i class="fas fa-phone"></i> </div>
                         <div class="content">
                             <h4>Teléfono :</h4>
-                            <p>696610158</p>
+                            <p>696610158 | 968530954</p>
                         </div>
                     </div>
                     <div class="info-box">
                         <div class="icon"> <i class="fas fa-map-marker-alt"></i> </div>
                         <div class="content">
                             <h4>Dirección :</h4>
-                            <p>Calle Grisén, San Felix</p>
+                            <p>Calle Grisén 10, Vereda San Felix Cartagena</p>
                         </div>
                     </div>
                     <div class="info-box">

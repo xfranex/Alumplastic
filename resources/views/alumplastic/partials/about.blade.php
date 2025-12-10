@@ -2,8 +2,10 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 section-title text-center">
-        <h3>Sobre Nosotros</h3>
-       
+        <h3>LA CALIDAD TIENE UN NOMBRE</h3>
+        <p>
+          <span id="rojoTexto">Alum</span><span id="azulTexto">plastic</span>
+        </p>
         <span class="section-title-line"></span> </div>
       <div class="col-md-6 mb-50">
         <div class="section-info">

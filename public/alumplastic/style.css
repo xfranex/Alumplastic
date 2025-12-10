@@ -281,6 +281,14 @@ h6 {
 	position: absolute;
 	width: 45px;
 }
+#azulTexto {
+	color: #2563EB;
+	font-size: 30px;
+}
+#rojoTexto {
+	color: #dc2626;
+	font-size: 30px;
+}
 .mb-30 {
 	margin-bottom: 30px !important;
 }
